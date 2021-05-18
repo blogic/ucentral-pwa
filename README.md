@@ -48,6 +48,10 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 Specify what it takes to deploy your app.
 
+#### Staging system
+
+The staging system runs at [https://zealous-mahavira-6ac0ef.netlify.app](https://zealous-mahavira-6ac0ef.netlify.app).
+
 ## Further Reading / Useful Links
 
 * [ember.js](https://emberjs.com/)
