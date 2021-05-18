@@ -57,7 +57,7 @@ module.exports = function (/* environment */) {
      * @type {Boolean}
      * @default "false"
      */
-    errorOnNamedArgumentMismatch: false,
+    errorOnNamedArgumentMismatch: true,
 
     /**
      * Cause a build error if missing translations are detected.
@@ -68,7 +68,7 @@ module.exports = function (/* environment */) {
      * @type {Boolean}
      * @default "false"
      */
-    errorOnMissingTranslations: false,
+    errorOnMissingTranslations: true,
 
     /**
      * removes empty translations from the build output.
@@ -77,7 +77,7 @@ module.exports = function (/* environment */) {
      * @type {Boolean}
      * @default "false"
      */
-    stripEmptyTranslations: false,
+    stripEmptyTranslations: true,
 
     /**
      * A function that is called whenever any translation key, from any locale, is missing at build time.
