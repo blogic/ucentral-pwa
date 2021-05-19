@@ -3,9 +3,17 @@ import { inject as service } from "@ember/service";
 
 export default class ApplicationRoute extends Route {
   @service intl;
+  @service auth;
+  @service router;
 
-  beforeModel() {
-    super.beforeModel(...arguments);
+  beforeModel(transition) {
+    super.beforeModel(transition);
+    
+    if (this.auth.isAuthenticated) {
+      this.router.transitionTo('dashboard');
+    } else {
+      this.router.transitionTo('auth');
+    }
 
     this.intl.setLocale(["en-us"]);
   }
