@@ -2,3 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  @font-face {
+    font-family: Inter;
+    font-weight: 100;
+    src: url("assets/fonts/inter/Inter-Thin.ttf") format("ttf");
+  }
+  @font-face {
+    font-family: Inter;
+    font-weight: 200;
+    src: url("assets/fonts/inter/Inter-ExtraLightt.ttf") format("ttf");
+  }
+
+  @font-face {
+    font-family: Inter;
+    font-weight: 300;
+    src: url("assets/fonts/inter/Inter-Light.ttf") format("ttf");
+  }
+  @font-face {
+    font-family: Inter;
+    font-weight: 400;
+    src: url("assets/fonts/inter/Inter-Regular.ttf") format("ttf");
+  }
+
+  @font-face {
+    font-family: Inter;
+    font-weight: 500;
+    src: url("assets/fonts/inter/Inter-Medium.ttf") format("ttf");
+  }
+  @font-face {
+    font-family: Inter;
+    font-weight: 600;
+    src: url("assets/fonts/inter/Inter-SemiBold.ttf") format("ttf");
+  }
+  @font-face {
+    font-family: Inter;
+    font-weight: 700;
+    src: url("assets/fonts/inter/Inter-Bold.ttf") format("ttf");
+  }
+  @font-face {
+    font-family: Inter;
+    font-weight: 800;
+    src: url("assets/fonts/inter/Inter-ExtraBold.ttf") format("ttf");
+  }
+  h1 {
+    @apply text-2xl font-medium;
+  }
+
+  h2 {
+    @apply text-xl font-medium;
+  }
+}

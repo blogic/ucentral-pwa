@@ -244,6 +244,7 @@ module.exports = {
       DEFAULT: "1",
     },
     fontFamily: {
+      body: ["Inter", "sans-serif"],
       sans: [
         "ui-sans-serif",
         "system-ui",
