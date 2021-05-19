@@ -1,0 +1,34 @@
+{{#let (unique-id) as |inputId|}}
+  <div
+    local-class="uc-password"
+    ...attributes
+  >
+    {{#if @label}}
+      <label
+        local-class="uc-password__label"
+        for={{inputId}}
+        data-test-label
+      >
+        {{@label}}
+      </label>
+    {{/if}}
+
+    <input
+      type="password"
+      value={{@value}}
+      id={{inputId}}
+      local-class="uc-password__control {{if @isError "--error"}}"
+      data-test-password-input
+      {{on "change" @onChange}}
+    />
+    
+    {{#if @errorMessage}}
+      <span
+        local-class="uc-password__error-message"
+        data-test-password-error
+      >
+        {{@errorMessage}}
+      </span>
+    {{/if}}
+  </div>
+{{/let}}

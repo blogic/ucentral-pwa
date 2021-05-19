@@ -1,0 +1,18 @@
+.uc-button {
+  @apply inline-block
+    w-full h-11
+    text-sm tracking-widest font-semibold;
+
+  border-radius: 21px;
+  background-image: linear-gradient(180deg, #226dc4 0%, #1e5fab 100%);
+}
+
+.uc-button:disabled {
+  @apply bg-gray-600;
+
+  background-image: none;
+}
+
+.uc-button.--loading {
+  @apply animate-pulse bg-yellow-400;
+}

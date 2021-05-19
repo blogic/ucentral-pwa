@@ -1,0 +1,32 @@
+{{#let (unique-id) as |inputId|}}
+  <div
+    local-class="uc-input"
+    ...attributes
+  >
+    {{#if @label}}
+      <label
+        local-class="uc-input__label"
+        for={{inputId}}
+        data-test-label
+      >
+        {{@label}}
+      </label>
+    {{/if}}
+    <input
+      type="text"
+      value={{@value}}
+      id={{inputId}}
+      local-class="uc-input__control {{if @isError "--error"}}"
+      {{on "change" @onChange}}
+      data-test-input
+    />
+    {{#if @errorMessage}}
+      <span
+        local-class="uc-input__error-message"
+        data-test-input-error
+      >
+        {{@errorMessage}}
+      </span>
+    {{/if}}
+  </div>
+{{/let}}

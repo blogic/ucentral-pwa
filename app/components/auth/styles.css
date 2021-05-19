@@ -1,0 +1,5 @@
+.auth {}
+
+.auth__input {
+  @apply mb-11;
+}

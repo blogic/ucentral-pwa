@@ -5,4 +5,18 @@
   <:description>
     Log in to view or modify your mesh network settings
   </:description>
+
+  <:default>
+    <main local-class="auth">
+      <Uc::Input
+        @label="IP Address"
+        @value="255.255.255.0"
+        local-class="auth__input"
+      />
+
+      <Uc::Button>
+        Next
+      </Uc::Button>
+    </main>
+  </:default>
 </Layout>

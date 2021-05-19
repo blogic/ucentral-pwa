@@ -5274,7 +5274,7 @@ ember-cli-htmlbars@^4.0.0, ember-cli-htmlbars@^4.3.1:
     strip-bom "^4.0.0"
     walk-sync "^2.0.2"
 
-ember-cli-htmlbars@^5.6.3, ember-cli-htmlbars@^5.7.1:
+ember-cli-htmlbars@^5.3.1, ember-cli-htmlbars@^5.6.3, ember-cli-htmlbars@^5.7.1:
   version "5.7.1"
   resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-5.7.1.tgz#eb5b88c7d9083bc27665fb5447a9b7503b32ce4f"
   integrity sha512-9laCgL4tSy48orNoQgQKEHp93MaqAs9ZOl7or5q+8iyGGJHW6sVXIYrVv5/5O9HfV6Ts8/pW1rSoaeKyLUE+oA==
@@ -5866,6 +5866,14 @@ ember-test-selectors@^5.2.0:
     calculate-cache-key-for-tree "^2.0.0"
     ember-cli-babel "^7.26.4"
     ember-cli-version-checker "^5.1.2"
+
+ember-unique-id-helper-polyfill@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/ember-unique-id-helper-polyfill/-/ember-unique-id-helper-polyfill-0.1.0.tgz#372f1272cd45dd3ee960a20a4945918264ff1bd3"
+  integrity sha512-qACD+lzMCOXRBJnJdA3tM1bHEKziVga2hhZGpTToLL8QlPj67+lwCaz+j6HBBA/Yw1yavVogO+NUwR8Q1iMKow==
+  dependencies:
+    ember-cli-babel "^7.23.0"
+    ember-cli-htmlbars "^5.3.1"
 
 emblem@^0.12.1:
   version "0.12.1"
