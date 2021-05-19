@@ -1,5 +1,10 @@
-.auth {}
-
 .auth__input {
   @apply mb-11;
+}
+
+.auth__confirm-button {
+  @apply
+    uppercase
+    text-white
+  ;
 }

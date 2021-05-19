@@ -1,22 +1,61 @@
-<Layout>
+<Uc::Layout>
   <:title>
-    Welcome to uCentral
+    {{#if this.isIpAddressStep}}
+      {{t "auth.ip_address.title"}}
+    {{else if this.isPasswordStep}}
+      {{t "auth.router_password.title"}}
+    {{/if}}
   </:title>
+
   <:description>
-    Log in to view or modify your mesh network settings
+    {{#if this.isIpAddressStep}}
+      {{t "auth.ip_address.description"}}
+    {{else if this.isPasswordStep}}
+      {{t "auth.router_password.description"}}
+    {{/if}}
   </:description>
 
-  <:default>
+  <:content>
     <main local-class="auth">
-      <Uc::Input
-        @label="IP Address"
-        @value="255.255.255.0"
-        local-class="auth__input"
-      />
+      {{#if this.isIpAddressStep}}
+        <Uc::Input
+          @label={{t "labels.ip_address"}}
+          @value={{this.ipAddress}}
+          @onInput={{this.handleIpAddress}}
+          @isError={{this.loginFailedMessage}}
+          @errorMessage={{this.loginFailedMessage}}
+          local-class="auth__input"
+          data-test-ip-address
+        />
 
-      <Uc::Button>
-        Next
-      </Uc::Button>
+        <Uc::Button
+          @onClick={{this.confirmIpAddress}}
+          local-class="auth__confirm-button"
+          disabled={{this.isIpAddressConfirmDisabled}}
+          data-test-confirm-button
+          {{on "click" this.confirmIpAddress}}
+        >
+          {{t "actions.next"}}
+        </Uc::Button>
+      {{else if this.isPasswordStep}}
+        <Uc::PasswordInput
+          @label={{t "labels.router_password"}}
+          @value={{this.password}}
+          @onInput={{this.handlePassword}}
+          local-class="auth__input"
+          data-test-password
+        />
+
+        <Uc::Button
+          @isLoading={{this.loginTask.isRunning}}
+          @onClick={{this.confirmPassword}}
+          local-class="auth__confirm-button"
+          disabled={{this.isPasswordConfirmDisabled}}
+          data-test-confirm-button
+        >
+          {{t "actions.login"}}
+        </Uc::Button>
+      {{/if}}
     </main>
-  </:default>
-</Layout>
+  </:content>
+</Uc::Layout>

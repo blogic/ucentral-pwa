@@ -5,5 +5,24 @@
     "viewNetworkMap": "View network map and connected devices",
     "viewQrCode": "View QR code",
     "editSettings": "Edit settings"
+  },
+  "labels": {
+    "ip_address": "IP Address",
+    "router_password": "Router Password"
+  },
+  "actions": {
+    "next": "next",
+    "login": "login"
+  },
+  "auth": {
+    "ip_address": {
+      "title": "Welcome to uCentral",
+      "description": "Log in to view or modify your mesh network settings"
+    },
+    "router_password": {
+      "title": "Enter your password",
+      "description": "Some information about where to find your password and/or how to recover it"
+    },
+    "incorrect_credentials": "Incorrect IP Address or Password"
   }
 }

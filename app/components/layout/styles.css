@@ -26,8 +26,9 @@
 
 .layout__description {
   @apply
-    font-normal
-    text-center
+    font-normal text-gray-700
+    text-center text-sm
+    px-3
+    mb-6
   ;
 }
-  

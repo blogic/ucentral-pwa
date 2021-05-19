@@ -4,7 +4,7 @@ import { render, click } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 import buttonStyles from "ucentral/components/uc/button/styles";
 
-module("Integration | Component | uc/input", function (hooks) {
+module("Integration | Component | uc/button", function (hooks) {
   setupRenderingTest(hooks);
 
   hooks.beforeEach(function () {
@@ -18,10 +18,10 @@ module("Integration | Component | uc/input", function (hooks) {
   });
 
   test("it renders", async function (assert) {
-    assert.expect(3);
+    assert.expect(1);
 
     await this.renderSubject();
-    assert.dom("[data-test-button]").doesNotExist();
+    assert.dom("[data-test-button]").exists();
   });
 
   test("it calls onClick when clicked", async function (assert) {

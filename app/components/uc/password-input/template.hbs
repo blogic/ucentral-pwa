@@ -19,7 +19,7 @@
       id={{inputId}}
       local-class="uc-password__control {{if @isError "--error"}}"
       data-test-password-input
-      {{on "change" @onChange}}
+      {{on "input" @onInput}}
     />
     
     {{#if @errorMessage}}

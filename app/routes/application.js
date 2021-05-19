@@ -8,11 +8,11 @@ export default class ApplicationRoute extends Route {
 
   beforeModel(transition) {
     super.beforeModel(transition);
-    
+
     if (this.auth.isAuthenticated) {
-      this.router.transitionTo('dashboard');
+      this.router.transitionTo("index");
     } else {
-      this.router.transitionTo('auth');
+      this.router.transitionTo("auth");
     }
 
     this.intl.setLocale(["en-us"]);

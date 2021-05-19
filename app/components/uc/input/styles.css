@@ -15,3 +15,12 @@
     shadow-sm
   ;
 }
+
+.uc-input__control.--error {
+  @apply
+    border border-yellow-400;
+}
+
+.uc-input__error-message {
+  @apply text-xs;
+}

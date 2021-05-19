@@ -11,7 +11,7 @@ module("Integration | Component | uc/input", function (hooks) {
     this.renderSubject = async () => {
       this.stubOnChange = this.stubOnChange || function () {};
       return render(hbs`<Uc::Input
-        @onChange={{this.stubOnChange}}
+        @onInput={{this.stubOnChange}}
         @value={{this.value}}
         @label={{this.label}}
         @errorMessage={{this.errorMessage}}
@@ -23,7 +23,7 @@ module("Integration | Component | uc/input", function (hooks) {
   test("it renders", async function (assert) {
     assert.expect(3);
     this.stubOnChange = () => {};
-    await render(hbs`<Uc::Input @onChange={{this.stubOnChange}} />`);
+    await render(hbs`<Uc::Input @onInput={{this.stubOnChange}} />`);
 
     assert.dom("[data-test-input]").exists();
     assert.dom("[data-test-label]").doesNotExist();
