@@ -822,6 +822,11 @@ module.exports = {
         "background-start": "rgba(220, 229, 239, 0.08)",
         "background-end": "rgba(220, 229, 239, 0.1)",
       }),
+      colors: {
+        gray: {
+          light: "#ececec",
+        },
+      },
     },
   },
   variantOrder: [

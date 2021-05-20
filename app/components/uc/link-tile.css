@@ -1,0 +1,3 @@
+.link-tile {
+  @apply border p-5 border-gray-light border-opacity-50 shadow-sm rounded-md block;
+}
