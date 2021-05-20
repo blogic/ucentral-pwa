@@ -18,6 +18,8 @@
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
+    "lint:css": "stylelint 'app/**/*.css'",
+    "lint:css:fix": "stylelint 'app/**/*.css' --fix",
     "lint:intl": "ember-intl-analyzer .",
     "start": "ember serve",
     "test": "npm-run-all lint test:*",
