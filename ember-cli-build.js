@@ -1,14 +1,14 @@
-'use strict';
+"use strict";
 
-const EmberApp = require('ember-cli/lib/broccoli/ember-app');
-const isProduction = EmberApp.env() === 'production';
+const EmberApp = require("ember-cli/lib/broccoli/ember-app");
+const isProduction = EmberApp.env() === "production";
 
 const purgecssOptions = {
   content: [
     // add extra paths here for components/controllers which include tailwind classes
-    './app/index.html',
-    './app/templates/**/*.hbs',
-    './app/components/**/*.hbs',
+    "./app/index.html",
+    "./app/templates/**/*.hbs",
+    "./app/components/**/*.hbs",
   ],
   defaultExtractor: (content) => {
     return content.match(/[A-Za-z0-9-_:/]+/g) || [];
@@ -20,12 +20,12 @@ const purgecssOptions = {
 };
 
 let cssModulesPlugins = [
-  require('postcss-import')({ path: ['node_modules'] }),
-  require('tailwindcss')('./config/tailwind/config.js'),
+  require("postcss-import")({ path: ["node_modules"] }),
+  require("tailwindcss")("./config/tailwind/config.js"),
 ];
 
 if (isProduction) {
-  const purgecss = require('@fullhuman/postcss-purgecss')(purgecssOptions);
+  const purgecss = require("@fullhuman/postcss-purgecss")(purgecssOptions);
   cssModulesPlugins.push(purgecss);
 }
 
