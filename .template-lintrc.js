@@ -8,5 +8,6 @@ module.exports = {
     "no-bare-strings": true,
     "css-modules/static-local-class": true,
     "css-modules/no-class": true,
+    quotes: "double",
   },
 };
