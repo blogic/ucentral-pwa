@@ -21,7 +21,7 @@ const purgecssOptions = {
 
 let cssModulesPlugins = [
   require('postcss-import')({ path: ['node_modules'] }),
-  require('tailwindcss')('./app/tailwind/config.js'),
+  require('tailwindcss')('./config/tailwind/config.js'),
 ];
 
 if (isProduction) {
