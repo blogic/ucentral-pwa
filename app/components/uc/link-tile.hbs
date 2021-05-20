@@ -1,3 +1,8 @@
 <LinkTo @route={{@route}} local-class="link-tile" data-test-link>
-  {{yield}}
+  <div local-class="icon">
+    {{inline-svg @icon}}
+  </div>
+  <p local-class="text">
+    {{yield}}
+  </p>
 </LinkTo>

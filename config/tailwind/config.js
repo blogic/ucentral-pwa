@@ -821,10 +821,15 @@ module.exports = {
         ...theme("colors"),
         "background-start": "rgba(220, 229, 239, 0.08)",
         "background-end": "rgba(220, 229, 239, 0.1)",
+        "button-start": "#226dc4",
+        "button-end": "#1e5fab",
       }),
       colors: {
         gray: {
           light: "#ececec",
+        },
+        blue: {
+          primary: "#0c2644",
         },
       },
     },
