@@ -1,3 +1,9 @@
 {
-  "dashboard": "Dashboard"
+  "dashboard": {
+    "title": "My network",
+    "description": "Manage your mesh network",
+    "viewNetworkMap": "View network map and connected devices",
+    "viewQrCode": "View QR code",
+    "editSettings": "Edit settings"
+  }
 }

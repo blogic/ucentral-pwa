@@ -1,5 +1,5 @@
 .link-tile {
-  @apply border p-5 border-gray-light border-opacity-50 shadow-sm rounded-md block flex items-center;
+  @apply border p-5 border-gray-light border-opacity-50 shadow-sm rounded-md block flex items-center no-underline;
 }
 
 .icon {
@@ -7,5 +7,5 @@
 }
 
 .text {
-  @apply text-blue-primary flex-grow ml-3 no-underline;
+  @apply text-blue-primary flex-grow ml-3;
 }
