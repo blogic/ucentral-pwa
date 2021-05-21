@@ -10,7 +10,7 @@ module.exports = {
       legacyDecorators: true,
     },
   },
-  plugins: ["ember"],
+  plugins: ["ember", "ember-concurrency"],
   extends: [
     "eslint:recommended",
     "plugin:ember/recommended",
@@ -19,7 +19,11 @@ module.exports = {
   env: {
     browser: true,
   },
-  rules: {},
+  rules: {
+    "ember-concurrency/no-perform-without-catch": "error",
+    "ember-concurrency/require-task-name-suffix": "error",
+    "ember-concurrency/no-native-promise-helpers": "error",
+  },
   overrides: [
     // node files
     {
