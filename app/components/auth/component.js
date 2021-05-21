@@ -11,8 +11,9 @@ const STEPS = {
 
 export default class AuthComponent extends Component {
   @service intl;
-  @service auth;
+  @service session;
   @service router;
+  @service config;
 
   @tracked currentStep = STEPS.IP_ADDRESS;
   @tracked ipAddress = "";
@@ -32,7 +33,7 @@ export default class AuthComponent extends Component {
   }
 
   get isPasswordConfirmDisabled() {
-    return !this.password.trim();
+    return !this.password.trim() || this.loginTask.isRunning;
   }
 
   @action

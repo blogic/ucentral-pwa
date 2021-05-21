@@ -1,24 +1,32 @@
 import { module, test } from "qunit";
 import { visit, currentURL, fillIn, click } from "@ember/test-helpers";
 import { setupApplicationTest } from "ember-qunit";
-
-import AuthService from "ucentral/services/auth";
+import { setupPretender } from "ucentral/tests/helpers/pretender";
+import UcentralRouterAuthenticator from "ucentral/authenticators/ucentral-router";
 
 const createAuthServiceStub = (loginStub) =>
-  class AuthServiceStub extends AuthService {
-    login = loginStub;
+  class UcentralRouterAuthenticatorStub extends UcentralRouterAuthenticator {
+    authenticate = loginStub;
   };
 
 module("Acceptance | authentication", function (hooks) {
   setupApplicationTest(hooks);
+  setupPretender(hooks);
 
   test("user is redirected to /auth when not authenticated", async function (assert) {
+    this.pretender.post("/authenticate", () => {
+      assert.ok(true, "successfuly hit authenticate endpoint");
+      return [200, {}, "{}"];
+    });
     await visit("/");
 
     assert.equal(currentURL(), "/auth");
   });
 
   test("given user entered correct credentials they are redirected to /dashboard", async function (assert) {
+    this.pretender.post("/authenticate", () => {
+      return [200, {}, "{}"];
+    });
     const authStub = createAuthServiceStub(async () => true);
     this.owner.register("service:auth", authStub);
     await visit("/");
