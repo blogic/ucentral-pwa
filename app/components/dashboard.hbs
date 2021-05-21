@@ -1,0 +1,15 @@
+<Uc::Layout>
+  <:title>{{t "dashboard.title"}}</:title>
+  <:description>{{t "dashboard.description"}}</:description>
+  <:content>
+    <Uc::LinkTile @route="index" @icon="/assets/images/icons/network.svg" local-class="item" data-test-button-network-map>
+      {{t "dashboard.viewNetworkMap"}}
+    </Uc::LinkTile>
+    <Uc::LinkTile @route="index" @icon="/assets/images/icons/qr-code.svg" local-class="item" data-test-button-qr-code>
+      {{t "dashboard.viewQrCode"}}
+    </Uc::LinkTile>
+    <Uc::LinkTile @route="index" @icon="/assets/images/icons/settings.svg" local-class="item" data-test-button-edit-settings>
+      {{t "dashboard.editSettings"}}
+    </Uc::LinkTile>
+  </:content>
+</Uc::Layout>

@@ -1,0 +1,11 @@
+.link-tile {
+  @apply border p-5 border-gray-light border-opacity-50 shadow-sm rounded-md block flex items-center no-underline;
+}
+
+.icon {
+  @apply bg-gradient-to-b from-button-start to-button-end inline-block p-3 rounded-lg flex-grow-0;
+}
+
+.text {
+  @apply text-blue-primary flex-grow ml-3;
+}

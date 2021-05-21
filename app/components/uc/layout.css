@@ -12,6 +12,7 @@
   @apply
     flex flex-grow flex-col
     items-center
+    mb-5
   ;
 }
 
