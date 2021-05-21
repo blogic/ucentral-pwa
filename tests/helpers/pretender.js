@@ -1,6 +1,6 @@
 import Pretender from "pretender";
 
-export const setupPretenderHook = function (hooks) {
+export const setupPretender = function (hooks) {
   hooks.beforeEach(function () {
     this.pretender = new Pretender();
   });
