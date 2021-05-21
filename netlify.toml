@@ -1,0 +1,9 @@
+[build]
+  command = "yarn run build"
+  publish = "dist"
+
+# serve index.html for every request
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
