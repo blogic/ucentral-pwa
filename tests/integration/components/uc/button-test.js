@@ -2,7 +2,7 @@ import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { render, click } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
-import buttonStyles from "ucentral/components/uc/button/styles";
+import buttonStyles from "ucentral/components/uc/button.css";
 
 module("Integration | Component | uc/button", function (hooks) {
   setupRenderingTest(hooks);

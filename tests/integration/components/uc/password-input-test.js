@@ -2,7 +2,7 @@ import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { render, fillIn } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
-import inputStyles from "ucentral/components/uc/password-input/styles";
+import inputStyles from "ucentral/components/uc/password-input.css";
 
 module("Integration | Component | uc/password-input", function (hooks) {
   setupRenderingTest(hooks);
