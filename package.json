@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
+    "@ember/render-modifiers": "^1.0.2",
     "@ember/test-helpers": "^2.2.5",
     "@fullhuman/postcss-purgecss": "^4.0.3",
     "@glimmer/component": "^1.0.4",
@@ -74,6 +75,7 @@
     "postcss-import": "^14.0.2",
     "pretender": "^3.4.3",
     "prettier": "^2.2.1",
+    "qrcode": "^1.4.4",
     "qunit": "^2.14.1",
     "qunit-dom": "^1.6.0",
     "stylelint": "^13.13.1",
