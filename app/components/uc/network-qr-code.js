@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { inject as service } from "@ember/service";
 import { task } from "ember-concurrency-decorators";
+import { waitForEvent } from "ember-concurrency";
 
 export default class NetworkQrCodeComponent extends Component {
   @service qrCode;
@@ -14,7 +15,13 @@ export default class NetworkQrCodeComponent extends Component {
 
   @task({ keepLatest: true })
   *drawTask(canvas) {
-    const { width, height } = canvas;
-    yield this.qrCode.toCanvas(canvas, this.settingsString, { width, height });
+    while (true) {
+      const { width, height } = canvas;
+      yield this.qrCode.toCanvas(canvas, this.settingsString, {
+        width,
+        height,
+      });
+      yield waitForEvent(window, "resize");
+    }
   }
 }

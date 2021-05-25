@@ -1,6 +1,6 @@
 import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render } from "@ember/test-helpers";
+import { render, triggerEvent } from "@ember/test-helpers";
 import Service from "@ember/service";
 import { hbs } from "ember-cli-htmlbars";
 
@@ -47,6 +47,30 @@ module("Integration | Component | uc/network-qr-code", function (hooks) {
 
     await render(
       hbs`<Uc::NetworkQrCode @ssid="mynetwork" @password="mypass" @encryption="wpa" @isHidden={{true}} />`
+    );
+  });
+
+  test("it redraws the QR code when the window's size changes", async function (assert) {
+    let calls = 0;
+    this.owner.register(
+      "service:qr-code",
+      class MockQrCodeService extends Service {
+        toCanvas() {
+          calls++;
+        }
+      }
+    );
+
+    await render(
+      hbs`<Uc::NetworkQrCode @ssid="mynetwork" @password="mypass" @encryption="wpa" @isHidden={{true}} />`
+    );
+
+    await triggerEvent(window, "resize");
+
+    assert.equal(
+      calls,
+      2,
+      "The QR code was drawn twice – on initial render and when the window was resized"
     );
   });
 });
