@@ -74,18 +74,30 @@ module("Unit | Authenticator | UcentralRouterAuthenticator", function (hooks) {
   });
 
   test("#restore throws when it receives empty session object", async function (assert) {
-    assert.expect(1);
+    assert.expect(2);
 
-    await assert.rejects(this.authenticator.restore({}), (error) => {
-      return error === "UcentralRouterAuthenticator was provided empty session";
-    });
+    try {
+      await this.authenticator.restore({});
+    } catch (error) {
+      assert.ok(error instanceof Error);
+      assert.equal(
+        error.message,
+        "UcentralRouterAuthenticator was provided empty session"
+      );
+    }
   });
 
   test("#restore throws when it receives empty session data", async function (assert) {
-    assert.expect(1);
+    assert.expect(2);
 
-    await assert.rejects(this.authenticator.restore(), (error) => {
-      return error === "UcentralRouterAuthenticator was provided empty session";
-    });
+    try {
+      await this.authenticator.restore();
+    } catch (error) {
+      assert.ok(error instanceof Error);
+      assert.equal(
+        error.message,
+        "UcentralRouterAuthenticator was provided empty session"
+      );
+    }
   });
 });
