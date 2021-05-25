@@ -39,7 +39,7 @@ module("Integration | Component | auth", function (hooks) {
 
   test("shows error message when couldn't log-in", async function (assert) {
     assert.expect(1);
-    const authStub = createAuthServiceStub(async () => false);
+    const authStub = createAuthServiceStub(() => Promise.reject());
     this.owner.register("authenticator:ucentral-router", authStub);
 
     await render(hbs`<Auth />`);

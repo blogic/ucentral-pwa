@@ -33,6 +33,7 @@ module("Acceptance | authentication", function (hooks) {
   });
 
   test("given user entered incorrect credentials they are not redirected", async function (assert) {
+    assert.expect(2);
     this.server.post("/authenticate", () => {
       return new Response(400, {}, {});
     });
@@ -46,9 +47,11 @@ module("Acceptance | authentication", function (hooks) {
     await click("[data-test-confirm-button]");
 
     assert.equal(currentURL(), "/auth");
+    assert.dom("[data-test-ip-address]").exists();
   });
 
   test("given authenticate endpoint failed to respond, they are not redirected", async function (assert) {
+    assert.expect(2);
     await visit("/");
 
     await fillIn("[data-test-ip-address] [data-test-input]", "192.168.1.2");
@@ -58,5 +61,6 @@ module("Acceptance | authentication", function (hooks) {
     await click("[data-test-confirm-button]");
 
     assert.equal(currentURL(), "/auth");
+    assert.dom("[data-test-ip-address]").exists();
   });
 });

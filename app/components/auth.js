@@ -50,7 +50,10 @@ export default class AuthComponent extends Component {
         userId: this.ipAddress,
         password: this.password,
       })
-      .catch((error) => console.error(error));
+      .catch(() => {
+        this.currentStep = STEPS.IP_ADDRESS;
+        this.loginFailedMessage = this.intl.t("auth.incorrect_credentials");
+      });
   }
 
   @action
@@ -65,14 +68,9 @@ export default class AuthComponent extends Component {
 
   @task
   *loginTask(credentials) {
-    const isAuthenticated = yield this.session.authenticate(
+    yield this.session.authenticate(
       "authenticator:ucentral-router",
       credentials
     );
-
-    if (!isAuthenticated) {
-      this.currentStep = STEPS.IP_ADDRESS;
-      this.loginFailedMessage = this.intl.t("auth.incorrect_credentials");
-    }
   }
 }
