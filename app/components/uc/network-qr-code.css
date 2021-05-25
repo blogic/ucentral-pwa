@@ -1,0 +1,8 @@
+.qr-code {
+  @apply border p-5 border-gray-light border-opacity-50 shadow-sm rounded-md flex justify-center py-16;
+}
+
+.canvas {
+  width: 50vw;
+  height: 50vw;
+}
