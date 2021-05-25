@@ -57,6 +57,16 @@ export default class AuthComponent extends Component {
   }
 
   @action
+  submitForm(event) {
+    event.preventDefault();
+    if (this.isIpAddressStep) {
+      this.confirmIpAddress();
+    } else if (this.isPasswordStep) {
+      this.confirmPassword();
+    }
+  }
+
+  @action
   handlePassword(event) {
     this.password = event.target.value;
   }

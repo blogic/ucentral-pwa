@@ -12,7 +12,7 @@ module("Integration | Component | uc/button", function (hooks) {
       this.onClick = this.onClick || function () {};
       return render(hbs`<Uc::Button
         @isLoading={{this.isLoading}}
-        @onClick={{this.onClick}}
+        {{on "click" this.onClick}}
       />`);
     };
   });
@@ -24,7 +24,7 @@ module("Integration | Component | uc/button", function (hooks) {
     assert.dom("[data-test-button]").exists();
   });
 
-  test("it calls onClick when clicked", async function (assert) {
+  test("it can have action defined with on modifier", async function (assert) {
     assert.expect(1);
 
     this.onClick = () => assert.ok(true, "clicked");
