@@ -5,6 +5,8 @@ import { hbs } from "ember-cli-htmlbars";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import UcentralRouterAuthenticator from "ucentral/authenticators/ucentral-router";
 import confirmButtonStyles from "ucentral/components/uc/button.css";
+import RSVP from "rsvp";
+import { next } from "@ember/runloop";
 
 const createAuthServiceStub = (loginStub) =>
   class UcentralRouterAuthenticatorStub extends UcentralRouterAuthenticator {
@@ -77,12 +79,9 @@ module("Integration | Component | auth", function (hooks) {
 
   test("'login' button is disabled when authentication request is in progress", async function (assert) {
     assert.expect(2);
-    const authStub = createAuthServiceStub(
-      () =>
-        new Promise((resolve) => {
-          setTimeout(resolve, 300);
-        })
-    );
+
+    const deferred = RSVP.defer();
+    const authStub = createAuthServiceStub(() => deferred.promise);
     this.owner.register("authenticator:ucentral-router", authStub);
 
     await render(hbs`<Auth />`);
@@ -92,9 +91,12 @@ module("Integration | Component | auth", function (hooks) {
     await fillIn("[data-test-password] [data-test-password-input]", "Secret");
     await click("[data-test-confirm-button]");
 
-    assert
-      .dom("[data-test-confirm-button]")
-      .hasClass(confirmButtonStyles["--loading"]);
-    assert.dom("[data-test-confirm-button]").hasAttribute("disabled");
+    next(() => {
+      assert
+        .dom("[data-test-confirm-button]")
+        .hasClass(confirmButtonStyles["--loading"]);
+      assert.dom("[data-test-confirm-button]").hasAttribute("disabled");
+      deferred.resolve();
+    });
   });
 });
