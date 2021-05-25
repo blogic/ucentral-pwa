@@ -47,7 +47,7 @@ export default class AuthComponent extends Component {
 
     this.loginTask
       .perform({
-        ipAddress: this.ipAddress,
+        userId: this.ipAddress,
         password: this.password,
       })
       .catch((error) => console.error(error));
@@ -65,14 +65,8 @@ export default class AuthComponent extends Component {
 
   @task
   *loginTask(credentials) {
-    const useMockAuthenticator = this.config.getConfig(
-      "APP.useMockAuthenticator"
-    );
-    const authenticator = useMockAuthenticator
-      ? "authenticator:mock-ucentral-router"
-      : "authenticator:ucentral-router";
     const isAuthenticated = yield this.session.authenticate(
-      authenticator,
+      "authenticator:ucentral-router",
       credentials
     );
 

@@ -1,12 +1,13 @@
 import { module, test } from "qunit";
 import { visit, currentURL, fillIn, click } from "@ember/test-helpers";
 import { setupApplicationTest } from "ember-qunit";
-import { setupPretender } from "ucentral/tests/helpers/pretender";
+import { setupMirage } from "ember-cli-mirage/test-support";
 import { invalidateSession } from "ember-simple-auth/test-support";
+import { Response } from "miragejs";
 
 module("Acceptance | authentication", function (hooks) {
   setupApplicationTest(hooks);
-  setupPretender(hooks);
+  setupMirage(hooks);
 
   test("user is redirected to /auth when not authenticated", async function (assert) {
     await invalidateSession();
@@ -17,8 +18,8 @@ module("Acceptance | authentication", function (hooks) {
   });
 
   test("given user entered correct credentials they are redirected to /dashboard", async function (assert) {
-    this.pretender.post("/authenticate", () => {
-      return [200, {}, JSON.stringify({ succeeded: true })];
+    this.server.post("/authenticate", () => {
+      return new Response(200, {}, { succeeded: true });
     });
     await visit("/");
 
@@ -32,8 +33,8 @@ module("Acceptance | authentication", function (hooks) {
   });
 
   test("given user entered incorrect credentials they are not redirected", async function (assert) {
-    this.pretender.post("/authenticate", () => {
-      return [400, {}, "{}"];
+    this.server.post("/authenticate", () => {
+      return new Response(400, {}, {});
     });
 
     await visit("/");
@@ -47,7 +48,7 @@ module("Acceptance | authentication", function (hooks) {
     assert.equal(currentURL(), "/auth");
   });
 
-  test("given authenticate endpoint failed to respond", async function (assert) {
+  test("given authenticate endpoint failed to respond, they are not redirected", async function (assert) {
     await visit("/");
 
     await fillIn("[data-test-ip-address] [data-test-input]", "192.168.1.2");

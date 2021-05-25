@@ -45,7 +45,9 @@ module.exports = function (environment) {
 
   if (environment === "production") {
     // here you can enable a production-specific feature
-    ENV.APP.useMockAuthenticator = true;
+    ENV["ember-cli-mirage"] = {
+      enabled: true,
+    };
   }
 
   return ENV;

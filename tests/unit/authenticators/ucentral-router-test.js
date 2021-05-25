@@ -1,8 +1,11 @@
 import { module, test } from "qunit";
-import { setupPretender } from "ucentral/tests/helpers/pretender";
+import { setupMirage } from "ember-cli-mirage/test-support";
+import { setupTest } from "ember-qunit";
+import { Response } from "miragejs";
 
 module("Unit | Authenticator | UcentralRouterAuthenticator", function (hooks) {
-  setupPretender(hooks);
+  setupTest(hooks);
+  setupMirage(hooks);
 
   hooks.beforeEach(function () {
     this.authenticator = this.owner.lookup("authenticator:ucentral-router");
@@ -10,7 +13,7 @@ module("Unit | Authenticator | UcentralRouterAuthenticator", function (hooks) {
 
   test("#authenticate makes a request", async function (assert) {
     assert.expect(1);
-    this.pretender.post("/authenticate", () => {
+    this.server.post("/authenticate", () => {
       assert.ok(true, "successfuly hit authenticate endpoint");
       return [200, {}, "{}"];
     });
@@ -20,12 +23,12 @@ module("Unit | Authenticator | UcentralRouterAuthenticator", function (hooks) {
 
   test("#authenticate sends payload", async function (assert) {
     assert.expect(1);
-    this.pretender.post("/authenticate", (request) => {
+    this.server.post("/authenticate", (schema, request) => {
       assert.deepEqual(JSON.parse(request.requestBody), {
         userId: "192.168.1.1",
         password: "Secret",
       });
-      return [200, {}, "{}"];
+      return new Response(200, {}, {});
     });
 
     await this.authenticator.authenticate({
@@ -36,8 +39,8 @@ module("Unit | Authenticator | UcentralRouterAuthenticator", function (hooks) {
 
   test("#authenticate payload on success is returned", async function (assert) {
     assert.expect(1);
-    this.pretender.post("/authenticate", () => {
-      return [200, {}, JSON.stringify({ succeeded: true })];
+    this.server.post("/authenticate", () => {
+      return new Response(200, {}, { succeeded: true });
     });
 
     const data = await this.authenticator.authenticate({
@@ -50,8 +53,8 @@ module("Unit | Authenticator | UcentralRouterAuthenticator", function (hooks) {
 
   test("#authenticate rejects on bad request", async function (assert) {
     assert.expect(1);
-    this.pretender.post("/authenticate", () => {
-      return [400, {}, ""];
+    this.server.post("/authenticate", () => {
+      return new Response(400, {}, {});
     });
 
     assert.rejects(

@@ -2,7 +2,7 @@ import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { render, fillIn, click } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
-import { setupPretender } from "ucentral/tests/helpers/pretender";
+import { setupMirage } from "ember-cli-mirage/test-support";
 import UcentralRouterAuthenticator from "ucentral/authenticators/ucentral-router";
 import confirmButtonStyles from "ucentral/components/uc/button.css";
 
@@ -13,7 +13,7 @@ const createAuthServiceStub = (loginStub) =>
 
 module("Integration | Component | auth", function (hooks) {
   setupRenderingTest(hooks);
-  setupPretender(hooks);
+  setupMirage(hooks);
 
   test("auth service receives correct params when attempting login", async function (assert) {
     assert.expect(1);
