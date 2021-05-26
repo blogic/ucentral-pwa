@@ -18,16 +18,11 @@ module("Integration | Component | auth", function (hooks) {
   setupMirage(hooks);
 
   test("auth service receives correct params when attempting login", async function (assert) {
-    assert.expect(1);
-    const authStub = createAuthServiceStub(async (params) =>
-      assert.deepEqual(
-        {
-          userId: "192.168.1.2",
-          password: "Secret",
-        },
-        params
-      )
-    );
+    assert.expect(2);
+    const authStub = createAuthServiceStub(async (userId, password) => {
+      assert.equal(userId, "192.168.1.2");
+      assert.equal(password, "Secret");
+    });
     this.owner.register("authenticator:ucentral-router", authStub);
 
     await render(hbs`<Auth />`);

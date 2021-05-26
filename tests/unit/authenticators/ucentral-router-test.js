@@ -31,10 +31,7 @@ module("Unit | Authenticator | UcentralRouterAuthenticator", function (hooks) {
       return new Response(200, {}, {});
     });
 
-    await this.authenticator.authenticate({
-      userId: "192.168.1.1",
-      password: "Secret",
-    });
+    await this.authenticator.authenticate("192.168.1.1", "Secret");
   });
 
   test("#authenticate payload on success is returned", async function (assert) {
