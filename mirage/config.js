@@ -1,4 +1,5 @@
 import { Response } from "miragejs";
+import ENV from "ucentral/config/environment";
 
 export default function () {
   // These comments are here to help you get started. Feel free to delete them.
@@ -25,7 +26,7 @@ export default function () {
     https://www.ember-cli-mirage.com/docs/route-handlers/shorthands
   */
 
-  this.post("/authenticate", function (schema, request) {
+  this.post(ENV.APP.AUTHENTICATION_URL, function (schema, request) {
     const payload = JSON.parse(request.requestBody);
 
     if (payload.userId === "192.168.1.1" && payload.password === "Secret") {

@@ -1,5 +1,6 @@
 import Base from "ember-simple-auth/authenticators/base";
 import fetch from "fetch";
+import ENV from "ucentral/config/environment";
 
 export default class UcentralRouterAuthenticator extends Base {
   async restore(data) {
@@ -10,7 +11,7 @@ export default class UcentralRouterAuthenticator extends Base {
   }
 
   async authenticate(userId, password) {
-    const authenticateResponse = await fetch("/authenticate", {
+    const authenticateResponse = await fetch(ENV.APP.AUTHENTICATION_URL, {
       method: "POST",
       body: JSON.stringify({ userId, password }),
     });
