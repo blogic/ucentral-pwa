@@ -33,27 +33,17 @@ export default class AuthComponent extends Component {
   }
 
   get isPasswordConfirmDisabled() {
-    return !this.password.trim() || this.loginTask.isRunning;
+    return !this.password.trim() || this.submitTask.isRunning;
   }
 
-  @action
-  confirmIpAddress() {
-    this.currentStep = STEPS.PASSWORD;
-  }
-
-  @action
-  confirmPassword() {
-    this.loginFailedMessage = "";
-    this.loginTask.perform();
-  }
-
-  @action
-  submitForm(event) {
+  @task
+  *submitTask(event) {
     event.preventDefault();
     if (this.isIpAddressStep) {
-      this.confirmIpAddress();
+      this.currentStep = STEPS.PASSWORD;
     } else if (this.isPasswordStep) {
-      this.confirmPassword();
+      this.loginFailedMessage = "";
+      return yield this.login();
     }
   }
 
@@ -67,10 +57,9 @@ export default class AuthComponent extends Component {
     this.ipAddress = event.target.value;
   }
 
-  @task
-  *loginTask() {
+  async login() {
     try {
-      yield this.session.authenticate(
+      await this.session.authenticate(
         "authenticator:ucentral-router",
         this.ipAddress,
         this.password
