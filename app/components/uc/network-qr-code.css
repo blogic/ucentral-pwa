@@ -3,6 +3,8 @@
 }
 
 .canvas {
+  @apply mb-6;
+
   width: 50vw;
   height: 50vw;
 }

@@ -5,4 +5,8 @@ export default class QrCodeService extends Service {
   toCanvas() {
     return QRCode.toCanvas(...arguments);
   }
+
+  toDataURL() {
+    return QRCode.toDataURL(...arguments);
+  }
 }
