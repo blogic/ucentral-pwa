@@ -27,5 +27,22 @@
   },
   "qr_code": {
     "share": "Share QR code"
+  },
+  "network_setup": {
+    "confirm": "Get started",
+    "wifi_password": {
+      "label": "WiFi Password",
+      "title": "Enter your WiFi password",
+      "description": "Let's set up your mesh network WiFi"
+    },
+    "wifi_name": {
+      "label": "WiFi Name",
+      "title": "Set up mesh network",
+      "description": "Let's set up your mesh network WiFi"
+    },
+    "applying_settings": {
+      "title": "Just a moment, we're applying your settings",
+      "description": "Your <b>{deviceName}</b> mesh network is getting started..."
+    }
   }
 }
