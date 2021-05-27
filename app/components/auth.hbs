@@ -1,0 +1,64 @@
+<Uc::Layout>
+  <:title>
+    {{#if this.isIpAddressStep}}
+      {{t "auth.ip_address.title"}}
+    {{else if this.isPasswordStep}}
+      {{t "auth.router_password.title"}}
+    {{/if}}
+  </:title>
+
+  <:description>
+    {{#if this.isIpAddressStep}}
+      {{t "auth.ip_address.description"}}
+    {{else if this.isPasswordStep}}
+      {{t "auth.router_password.description"}}
+    {{/if}}
+  </:description>
+
+  <:content>
+    <main local-class="auth">
+      <form
+        {{on "submit" (perform this.submitTask)}}
+      >
+        {{#if this.isIpAddressStep}}
+          <Uc::Input
+            @label={{t "labels.ip_address"}}
+            @value={{this.ipAddress}}
+            @onInput={{this.handleIpAddress}}
+            @isError={{this.loginFailedMessage}}
+            @errorMessage={{this.loginFailedMessage}}
+            local-class="auth__input"
+            data-test-ip-address
+          />
+
+          <Uc::Button
+            local-class="auth__confirm-button"
+            disabled={{this.isIpAddressConfirmDisabled}}
+            data-test-confirm-button
+            type="submit"
+          >
+            {{t "actions.next"}}
+          </Uc::Button>
+        {{else if this.isPasswordStep}}
+          <Uc::PasswordInput
+            @label={{t "labels.router_password"}}
+            @value={{this.password}}
+            @onInput={{this.handlePassword}}
+            local-class="auth__input"
+            data-test-password
+          />
+
+          <Uc::Button
+            @isLoading={{this.submitTask.isRunning}}
+            local-class="auth__confirm-button"
+            disabled={{this.isPasswordConfirmDisabled}}
+            type="submit"
+            data-test-confirm-button
+          >
+            {{t "actions.login"}}
+          </Uc::Button>
+        {{/if}}
+      </form>
+    </main>
+  </:content>
+</Uc::Layout>

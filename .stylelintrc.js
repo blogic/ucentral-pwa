@@ -16,5 +16,11 @@ module.exports = {
         ],
       },
     ],
+    "property-no-unknown": [
+      true,
+      {
+        ignoreProperties: ["composes"],
+      },
+    ],
   },
 };

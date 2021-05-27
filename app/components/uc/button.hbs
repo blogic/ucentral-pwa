@@ -1,0 +1,9 @@
+<button
+  type="button"
+  local-class="uc-button {{if @isLoading "--loading"}}"
+  disabled={{@isLoading}}
+  data-test-button
+  ...attributes
+>
+  {{yield}}
+</button>

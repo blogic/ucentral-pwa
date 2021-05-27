@@ -33,6 +33,7 @@ module.exports = function (defaults) {
   let app = new EmberApp(defaults, {
     cssModules: {
       plugins: cssModulesPlugins,
+      includeExtensionInModulePath: true,
     },
   });
 

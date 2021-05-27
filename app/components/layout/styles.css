@@ -1,10 +1,7 @@
 .layout {
   @apply
+    flex
     p-4
-    bg-gradient-to-b from-background-start to-background-end
-    h-screen
-    w-screen
-    overflow-scroll
   ;
 }
 
@@ -12,20 +9,19 @@
   @apply
     flex flex-grow flex-col
     items-center
-    mb-6
   ;
 }
 
 .layout__logo {
-  @apply my-5 w-2/5;
+  @apply my-5;
 }
 
 .layout__title {
-  @apply
-    pb-2
-    font-semibold
-    text-xl text-blue-900
-  ;
+  @apply pb-2;
+}
+
+.layout__content {
+  @apply w-full;
 }
 
 .layout__description {

@@ -20,6 +20,8 @@ module.exports = function (environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      AUTHENTICATION_URL:
+        "https://ucentral.dpaas.arilia.com:16001/api/v1/oauth2",
     },
   };
 
@@ -41,10 +43,15 @@ module.exports = function (environment) {
 
     ENV.APP.rootElement = "#ember-testing";
     ENV.APP.autoboot = false;
+
+    ENV.APP.AUTHENTICATION_URL = "/authenticate";
   }
 
   if (environment === "production") {
     // here you can enable a production-specific feature
+    ENV["ember-cli-mirage"] = {
+      enabled: true,
+    };
   }
 
   return ENV;

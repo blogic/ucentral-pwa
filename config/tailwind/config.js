@@ -24,7 +24,11 @@ module.exports = {
       red: colors.red,
       yellow: colors.amber,
       green: colors.emerald,
-      blue: colors.blue,
+      blue: {
+        ...colors.blue,
+        600: "#1E5FAB",
+        900: "#0C2644",
+      },
       indigo: colors.indigo,
       purple: colors.violet,
       pink: colors.pink,
@@ -496,7 +500,7 @@ module.exports = {
       normal: "0em",
       wide: "0.025em",
       wider: "0.05em",
-      widest: "0.1em",
+      widest: "1px",
     },
     lineHeight: {
       none: "1",

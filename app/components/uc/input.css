@@ -1,0 +1,26 @@
+.uc-input__label {
+  @apply
+    text-sm text-gray-500;
+}
+
+.uc-input__control {
+  @apply
+    block
+    w-full
+    text-sm text-gray-500
+    border rounded
+    pl-2
+    mt-1
+    h-10
+    shadow-sm
+  ;
+}
+
+.uc-input__control.--error {
+  @apply
+    border border-yellow-400;
+}
+
+.uc-input__error-message {
+  @apply text-xs;
+}
