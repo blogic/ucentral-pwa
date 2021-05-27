@@ -21,7 +21,7 @@
     "lint:css": "stylelint 'app/**/*.css'",
     "lint:css:fix": "stylelint 'app/**/*.css' --fix",
     "lint:intl": "ember-intl-analyzer .",
-    "start": "ember serve",
+    "start": "ember serve --ssl=true",
     "test": "npm-run-all lint test:*",
     "test:ember": "ember test"
   },
