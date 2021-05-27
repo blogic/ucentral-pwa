@@ -32,7 +32,6 @@
           />
 
           <Uc::Button
-            local-class="auth__confirm-button"
             disabled={{this.isIpAddressConfirmDisabled}}
             data-test-confirm-button
             type="submit"
@@ -50,7 +49,6 @@
 
           <Uc::Button
             @isLoading={{this.submitTask.isRunning}}
-            local-class="auth__confirm-button"
             disabled={{this.isPasswordConfirmDisabled}}
             type="submit"
             data-test-confirm-button

@@ -1,7 +1,8 @@
 .uc-button {
   @apply inline-block
     w-full h-11
-    text-sm tracking-widest font-semibold;
+    text-sm tracking-widest font-semibold uppercase
+    text-white;
 
   border-radius: 21px;
   background-image: linear-gradient(180deg, #226dc4 0%, #1e5fab 100%);
