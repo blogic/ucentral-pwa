@@ -8,4 +8,8 @@ export default class Router extends EmberRouter {
 
 Router.map(function () {
   this.route("auth");
+
+  this.route('network-setup', function() {
+    this.route('new');
+  });
 });
