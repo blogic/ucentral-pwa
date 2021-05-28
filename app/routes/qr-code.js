@@ -7,4 +7,21 @@ export default class QrCodeRoute extends Route {
   beforeModel(transition) {
     this.session.requireAuthentication(transition, "auth");
   }
+
+  async model() {
+    let response = await fetch("/network-settings");
+    let {
+      ssid,
+      password,
+      encrypition,
+      hidden: isHidden,
+    } = await response.json();
+
+    return {
+      ssid,
+      password,
+      encrypition,
+      isHidden,
+    };
+  }
 }

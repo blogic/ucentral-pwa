@@ -33,5 +33,23 @@ module("Acceptance | qr-code", function (hooks) {
 
       assert.equal(currentURL(), "/qr-code");
     });
+
+    test("the correct network settings are rendered", async function (assert) {
+      this.get("/network-settings", function () {
+        return new Response(
+          400,
+          { "content-type": "application/json" },
+          {
+            ssid: "mynetwork",
+            password: "mypass",
+            encryption: "wpa2",
+            hidden: false,
+          }
+        );
+      });
+      await visit("/qr-code");
+
+      assert.dom("[data-test-layout-description]").containsText("mynetwork");
+    });
   });
 });
