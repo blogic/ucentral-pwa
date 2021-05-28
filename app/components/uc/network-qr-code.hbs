@@ -1,0 +1,13 @@
+<div local-class="qr-code">
+  <canvas local-class="canvas" {{did-insert (perform this.drawTask)}} data-test-canvas></canvas>
+</div>
+
+{{#if this.canShare}}
+  <Uc::Button
+    data-test-share-qr-code-button
+    type="button"
+    {{on "click" (perform this.shareTask)}}
+  >
+    {{t "qr_code.share"}}
+  </Uc::Button>
+{{/if}}

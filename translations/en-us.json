@@ -24,5 +24,8 @@
       "description": "Some information about where to find your password and/or how to recover it"
     },
     "incorrect_credentials": "Incorrect IP Address or Password"
+  },
+  "qr_code": {
+    "share": "Share QR code"
   }
 }
