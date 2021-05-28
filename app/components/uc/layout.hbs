@@ -1,8 +1,6 @@
 <div local-class="layout">
   <div local-class="layout__header">
-    <div local-class="layout__logo">
-      {{inline-svg "/assets/images/ucentral-logo.svg"}}
-    </div>
+    {{yield to="logo"}}
     <h1 local-class="layout__title" data-test-layout-title>
       {{yield to="title"}}
     </h1>

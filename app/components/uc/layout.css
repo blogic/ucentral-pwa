@@ -16,12 +16,9 @@
   ;
 }
 
-.layout__logo {
-  @apply my-5 w-2/5;
-}
-
 .layout__title {
   @apply
+    mt-5
     pb-2
     font-semibold
     text-xl text-blue-900
