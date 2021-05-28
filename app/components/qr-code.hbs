@@ -2,6 +2,6 @@
   <:title>{{t "qr_code.title"}}</:title>
   <:description>{{t "qr_code.description" ssid=@ssid}}</:description>
   <:content>
-    
+    <Uc::NetworkQrCode @ssid={{@ssid}} @password={{@password}} @encryption={{@encryption}} @isHidden={{@isHidden}} data-test-qr-code />
   </:content>
 </Uc::Layout>

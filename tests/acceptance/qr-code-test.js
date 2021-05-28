@@ -23,7 +23,7 @@ module("Acceptance | qr-code", function (hooks) {
     });
   });
 
-  module("when th session is authenticated", function (hooks) {
+  module("when the session is authenticated", function (hooks) {
     hooks.beforeEach(async function () {
       await authenticateSession();
     });
@@ -50,6 +50,12 @@ module("Acceptance | qr-code", function (hooks) {
       await visit("/qr-code");
 
       assert.dom("[data-test-layout-description]").containsText("mynetwork");
+    });
+
+    test("the QR code is rendered", async function (assert) {
+      await visit("/qr-code");
+
+      assert.dom("[data-test-qr-code]").exists();
     });
   });
 });

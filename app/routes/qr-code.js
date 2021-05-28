@@ -13,14 +13,14 @@ export default class QrCodeRoute extends Route {
     let {
       ssid,
       password,
-      encrypition,
+      encryption,
       hidden: isHidden,
     } = await response.json();
 
     return {
       ssid,
       password,
-      encrypition,
+      encryption,
       isHidden,
     };
   }
