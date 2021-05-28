@@ -29,6 +29,8 @@
     "incorrect_credentials": "Incorrect IP Address or Password"
   },
   "qr_code": {
+    "title": "QR code",
+    "description": "Use this QR code to connect other devices to the FRITZ!Box 7590 mesh network",
     "share": "Share QR code"
   },
   "network_setup": {
