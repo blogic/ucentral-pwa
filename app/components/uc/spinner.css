@@ -1,0 +1,4 @@
+.uc-spinner-container {
+  @apply flex justify-center animate-spin;
+  color: #F5891F;
+}

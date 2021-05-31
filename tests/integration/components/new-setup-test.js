@@ -137,6 +137,15 @@ module("Integration | Component | NewSetup", function (hooks) {
           .dom("[data-test-layout-description]")
           .hasText("Your Dummy mesh network is getting started...");
       });
+
+      test("spinner is visible", async function (assert) {
+        assert.expect(1);
+
+        await render(hbs`<NewSetup />`);
+        await GO_TO_APPLYING_SETTINGS_STEP();
+
+        assert.dom("[data-test-spinner]").exists();
+      });
     });
   });
 });
