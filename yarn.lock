@@ -6032,6 +6032,13 @@ ember-test-selectors@^5.2.0:
     ember-cli-babel "^7.26.4"
     ember-cli-version-checker "^5.1.2"
 
+ember-truth-helpers@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ember-truth-helpers/-/ember-truth-helpers-3.0.0.tgz#86766bdca4ac9b86bce3d262dff2aabc4a0ea384"
+  integrity sha512-hPKG9QqruAELh0li5xaiLZtr88ioWYxWCXisAWHWE0qCP4a2hgtuMzKUPpiTCkltvKjuqpzTZCU4VhQ+IlRmew==
+  dependencies:
+    ember-cli-babel "^7.22.1"
+
 ember-unique-id-helper-polyfill@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/ember-unique-id-helper-polyfill/-/ember-unique-id-helper-polyfill-0.1.0.tgz#372f1272cd45dd3ee960a20a4945918264ff1bd3"
