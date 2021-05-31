@@ -1,4 +1,11 @@
 <Uc::Layout>
+  <:logo>
+    <Uc::Progress
+      @steps={{this.steps}}
+      @currentStep={{this.currentStep}}
+    />
+  </:logo>
+
   <:title>
     {{#if this.isNetworkNameStep}}
       {{t "network_setup.wifi_name.title"}}

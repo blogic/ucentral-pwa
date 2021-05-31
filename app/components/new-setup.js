@@ -17,6 +17,8 @@ export default class NewSetupComponent extends Component {
   @tracked networkPassword = "";
   @tracked currentStep = STEPS.NETWORK_NAME;
 
+  steps = Object.values(STEPS);
+
   get isNetworkNameConfirmDisabled() {
     return !this.networkName.trim();
   }

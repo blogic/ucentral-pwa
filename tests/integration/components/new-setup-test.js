@@ -4,6 +4,8 @@ import { render, fillIn, click } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl, t } from "ember-intl/test-support";
+import dotStyles from "ucentral/components/uc/progress/dot.css";
+import strikethroughStyles from "ucentral/components/uc/progress/strikethrough.css";
 
 const goToPasswordStep = async (networkName = "some name") => {
   await fillIn("[data-test-network-name] [data-test-input]", networkName);
@@ -64,6 +66,26 @@ module("Integration | Component | NewSetup", function (hooks) {
         assert.dom("[data-test-network-name] [data-test-input]").hasNoValue();
         assert.dom("[data-test-confirm-button]").hasAttribute("disabled");
       });
+
+      test("steps are correctly highlighted", async function (assert) {
+        await render(hbs`<NewSetup />`);
+
+        assert.dom("[data-test-dot='0']").hasClass(dotStyles["--visited"]);
+        assert
+          .dom("[data-test-strikethrough='0']")
+          .doesNotHaveClass(strikethroughStyles["--active"]);
+
+        assert
+          .dom("[data-test-dot='1']")
+          .doesNotHaveClass(dotStyles["--visited"]);
+        assert
+          .dom("[data-test-strikethrough='1']")
+          .doesNotHaveClass(strikethroughStyles["--active"]);
+
+        assert
+          .dom("[data-test-dot='2']")
+          .doesNotHaveClass(dotStyles["--visited"]);
+      });
     });
 
     module("NETWORK_PASSWORD", function () {
@@ -71,7 +93,7 @@ module("Integration | Component | NewSetup", function (hooks) {
         assert.expect(1);
 
         await render(hbs`<NewSetup />`);
-        await GO_TO_PASSWROD_STEP();
+        await goToPasswordStep();
 
         assert
           .dom("[data-test-layout-title]")
@@ -82,7 +104,7 @@ module("Integration | Component | NewSetup", function (hooks) {
         assert.expect(1);
 
         await render(hbs`<NewSetup />`);
-        await GO_TO_PASSWROD_STEP();
+        await goToPasswordStep();
 
         assert
           .dom("[data-test-layout-description]")
@@ -93,7 +115,7 @@ module("Integration | Component | NewSetup", function (hooks) {
         assert.expect(1);
 
         await render(hbs`<NewSetup />`);
-        await GO_TO_PASSWROD_STEP();
+        await goToPasswordStep();
 
         assert
           .dom("[data-test-network-password] [data-test-label]")
@@ -104,12 +126,31 @@ module("Integration | Component | NewSetup", function (hooks) {
         assert.expect(2);
 
         await render(hbs`<NewSetup />`);
-        await GO_TO_PASSWROD_STEP();
+        await goToPasswordStep();
 
         assert
           .dom("[data-test-network-password] [data-test-input]")
           .hasNoValue();
         assert.dom("[data-test-confirm-button]").hasAttribute("disabled");
+      });
+
+      test("steps are correctly highlighted", async function (assert) {
+        await render(hbs`<NewSetup />`);
+        await goToPasswordStep();
+
+        assert.dom("[data-test-dot='0']").hasClass(dotStyles["--visited"]);
+        assert
+          .dom("[data-test-strikethrough='0']")
+          .hasClass(strikethroughStyles["--active"]);
+
+        assert.dom("[data-test-dot='1']").hasClass(dotStyles["--visited"]);
+        assert
+          .dom("[data-test-strikethrough='1']")
+          .doesNotHaveClass(strikethroughStyles["--active"]);
+
+        assert
+          .dom("[data-test-dot='2']")
+          .doesNotHaveClass(dotStyles["--visited"]);
       });
     });
 
@@ -118,7 +159,10 @@ module("Integration | Component | NewSetup", function (hooks) {
         assert.expect(1);
 
         await render(hbs`<NewSetup />`);
-        await GO_TO_APPLYING_SETTINGS_STEP();
+        await goToApplyingSettingsStep();
+        await waitFor(
+          `[data-test-strikethrough='1'].${strikethroughStyles["--active"]}`
+        );
 
         assert
           .dom("[data-test-layout-title]")
@@ -131,7 +175,10 @@ module("Integration | Component | NewSetup", function (hooks) {
         currentDeviceService.name = "Dummy";
 
         await render(hbs`<NewSetup />`);
-        await GO_TO_APPLYING_SETTINGS_STEP();
+        await goToApplyingSettingsStep();
+        await waitFor(
+          `[data-test-strikethrough='1'].${strikethroughStyles["--active"]}`
+        );
 
         assert
           .dom("[data-test-layout-description]")
@@ -142,9 +189,31 @@ module("Integration | Component | NewSetup", function (hooks) {
         assert.expect(1);
 
         await render(hbs`<NewSetup />`);
-        await GO_TO_APPLYING_SETTINGS_STEP();
-
+        await goToApplyingSettingsStep();
+        await waitFor(
+          `[data-test-strikethrough='1'].${strikethroughStyles["--active"]}`
+        );
         assert.dom("[data-test-spinner]").exists();
+      });
+
+      test("steps are correctly highlighted", async function (assert) {
+        await render(hbs`<NewSetup />`);
+        await goToApplyingSettingsStep();
+        await waitFor(
+          `[data-test-strikethrough='1'].${strikethroughStyles["--active"]}`
+        );
+
+        assert.dom("[data-test-dot='0']").hasClass(dotStyles["--visited"]);
+        assert
+          .dom("[data-test-strikethrough='0']")
+          .hasClass(strikethroughStyles["--active"]);
+
+        assert.dom("[data-test-dot='1']").hasClass(dotStyles["--visited"]);
+        assert
+          .dom("[data-test-strikethrough='1']")
+          .hasClass(strikethroughStyles["--active"]);
+
+        assert.dom("[data-test-dot='2']").hasClass(dotStyles["--visited"]);
       });
     });
   });

@@ -1,0 +1,12 @@
+.strikethrough {
+  @apply bg-white border;
+
+  height: 6px;
+  width: 50%;
+  z-index: -2;
+  top: 15px;
+}
+
+.strikethrough.--active {
+  @apply bg-blue-600;
+}
