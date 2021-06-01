@@ -35,4 +35,8 @@ export default function () {
 
     return new Response(400, {}, {});
   });
+
+  this.post(`${ENV.APP.DEVICE_URL}/:serialNumber/configure`, function () {
+    return new Response(200, {}, {});
+  });
 }

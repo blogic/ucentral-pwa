@@ -22,6 +22,7 @@ module.exports = function (environment) {
       // when it is created
       AUTHENTICATION_URL:
         "https://ucentral.dpaas.arilia.com:16001/api/v1/oauth2",
+      DEVICE_URL: "https://ucentral.dpaas.arilia.com:16001/api/v1/device",
     },
   };
 
@@ -45,6 +46,7 @@ module.exports = function (environment) {
     ENV.APP.autoboot = false;
 
     ENV.APP.AUTHENTICATION_URL = "/authenticate";
+    ENV.APP.DEVICE_URL = "/device";
   }
 
   if (environment === "production") {

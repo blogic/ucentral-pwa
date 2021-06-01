@@ -3,6 +3,7 @@ import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
 import { task } from "ember-concurrency-decorators";
 import { inject as service } from "@ember/service";
+import ENV from "ucentral/config/environment";
 
 const STEPS = {
   NETWORK_NAME: "NETWORK_NAME",
@@ -12,6 +13,7 @@ const STEPS = {
 
 export default class NewSetupComponent extends Component {
   @service currentDevice;
+  @service intl;
 
   @tracked networkName = "";
   @tracked networkPassword = "";
@@ -51,7 +53,48 @@ export default class NewSetupComponent extends Component {
 
   @task
   *submitTask(event) {
-    yield event.preventDefault();
+    event.preventDefault();
+
+    if (this.isNetworkNameStep) {
+      this.goToStep(STEPS.NETWORK_PASSWORD);
+    } else if (this.isNetworkPasswordStep) {
+      this.goToStep(STEPS.APPLYING_SETTINGS);
+      const configureDeviceResponse = yield this.configureDevice();
+
+      if (!configureDeviceResponse.ok) {
+        this.goToStep(STEPS.NETWORK_NAME);
+      }
+      return configureDeviceResponse;
+    }
+  }
+
+  async configureDevice() {
+    try {
+      const response = await fetch(
+        `${ENV.APP.DEVICE_URL}/${this.currentDevice.serialNumber}/configure`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            ssid: this.networkName,
+            password: this.networkPassword,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        return {
+          ok: false,
+          errorMessage: this.intl.t("errors.somethingWentWrong"),
+        };
+      }
+
+      return response;
+    } catch (error) {
+      return {
+        ok: false,
+        errorMessage: this.intl.t("errors.somethingWentWrong"),
+      };
+    }
   }
 
   goToStep(newStep) {

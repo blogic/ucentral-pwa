@@ -14,6 +14,9 @@
     "next": "next",
     "login": "login"
   },
+  "errors": {
+    "somethingWentWrong": "Something went wrong, please try again."
+  },
   "auth": {
     "ip_address": {
       "title": "Welcome to uCentral",

@@ -1,5 +1,8 @@
 .progress {
-  @apply flex flex-row w-full justify-between items-center;
+  @apply
+    flex flex-row w-full
+    px-4
+    justify-between items-center;
 
   position: relative;
 }

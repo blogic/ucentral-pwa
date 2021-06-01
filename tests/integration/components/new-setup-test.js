@@ -1,11 +1,12 @@
 import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render, fillIn, click } from "@ember/test-helpers";
+import { render, fillIn, click, waitFor } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl, t } from "ember-intl/test-support";
 import dotStyles from "ucentral/components/uc/progress/dot.css";
 import strikethroughStyles from "ucentral/components/uc/progress/strikethrough.css";
+import { Response } from "miragejs";
 
 const goToPasswordStep = async (networkName = "some name") => {
   await fillIn("[data-test-network-name] [data-test-input]", networkName);
@@ -32,8 +33,6 @@ module("Integration | Component | NewSetup", function (hooks) {
   module("Steps", function () {
     module("NETWORK_NAME", function () {
       test("has correct title", async function (assert) {
-        assert.expect(1);
-
         await render(hbs`<NewSetup />`);
         assert
           .dom("[data-test-layout-title]")
@@ -41,8 +40,6 @@ module("Integration | Component | NewSetup", function (hooks) {
       });
 
       test("has correct description", async function (assert) {
-        assert.expect(1);
-
         await render(hbs`<NewSetup />`);
         assert
           .dom("[data-test-layout-description]")
@@ -50,8 +47,6 @@ module("Integration | Component | NewSetup", function (hooks) {
       });
 
       test("input has correct label", async function (assert) {
-        assert.expect(1);
-
         await render(hbs`<NewSetup />`);
         assert
           .dom("[data-test-network-name] [data-test-label]")
@@ -59,8 +54,6 @@ module("Integration | Component | NewSetup", function (hooks) {
       });
 
       test("'next' button is disabled when network name is not entered", async function (assert) {
-        assert.expect(2);
-
         await render(hbs`<NewSetup />`);
 
         assert.dom("[data-test-network-name] [data-test-input]").hasNoValue();
@@ -90,8 +83,6 @@ module("Integration | Component | NewSetup", function (hooks) {
 
     module("NETWORK_PASSWORD", function () {
       test("has correct title", async function (assert) {
-        assert.expect(1);
-
         await render(hbs`<NewSetup />`);
         await goToPasswordStep();
 
@@ -112,8 +103,6 @@ module("Integration | Component | NewSetup", function (hooks) {
       });
 
       test("input has correct label", async function (assert) {
-        assert.expect(1);
-
         await render(hbs`<NewSetup />`);
         await goToPasswordStep();
 
@@ -123,8 +112,6 @@ module("Integration | Component | NewSetup", function (hooks) {
       });
 
       test("'next' button is disabled when network password is not entered", async function (assert) {
-        assert.expect(2);
-
         await render(hbs`<NewSetup />`);
         await goToPasswordStep();
 
@@ -154,10 +141,14 @@ module("Integration | Component | NewSetup", function (hooks) {
       });
     });
 
-    module("APPLYING_SETTINGS", function () {
-      test("has correct title", async function (assert) {
-        assert.expect(1);
+    module("APPLYING_SETTINGS", function (hooks) {
+      hooks.beforeEach(function () {
+        this.server.post("/device/:serialNumber/configure", function () {
+          return new Response(200, {}, {});
+        });
+      });
 
+      test("has correct title", async function (assert) {
         await render(hbs`<NewSetup />`);
         await goToApplyingSettingsStep();
         await waitFor(
@@ -170,7 +161,6 @@ module("Integration | Component | NewSetup", function (hooks) {
       });
 
       test("has correct description", async function (assert) {
-        assert.expect(1);
         const currentDeviceService = this.owner.lookup("service:currentDevice");
         currentDeviceService.name = "Dummy";
 
@@ -186,8 +176,6 @@ module("Integration | Component | NewSetup", function (hooks) {
       });
 
       test("spinner is visible", async function (assert) {
-        assert.expect(1);
-
         await render(hbs`<NewSetup />`);
         await goToApplyingSettingsStep();
         await waitFor(
@@ -215,6 +203,82 @@ module("Integration | Component | NewSetup", function (hooks) {
 
         assert.dom("[data-test-dot='2']").hasClass(dotStyles["--visited"]);
       });
+    });
+  });
+
+  module("Configure device", function () {
+    test("request is sent", async function (assert) {
+      assert.expect(1);
+      this.server.post("/device/:serialNumber/configure", function () {
+        assert.ok(true, "sent request");
+      });
+
+      await render(hbs`<NewSetup />`);
+      await goToApplyingSettingsStep();
+    });
+
+    test("request is sent with correct serial number", async function (assert) {
+      assert.expect(1);
+
+      const currentDeviceService = this.owner.lookup("service:currentDevice");
+      currentDeviceService.serialNumber = "1111-AAAA-BBBB";
+      this.server.post(
+        "/device/:serialNumber/configure",
+        function (schema, request) {
+          assert.equal(request.params.serialNumber, "1111-AAAA-BBBB");
+        }
+      );
+
+      await render(hbs`<NewSetup />`);
+      await goToApplyingSettingsStep();
+    });
+
+    test("request receives ssid and password in payload", async function (assert) {
+      assert.expect(1);
+
+      const currentDeviceService = this.owner.lookup("service:currentDevice");
+      currentDeviceService.serialNumber = "1111-AAAA-BBBB";
+      this.server.post(
+        "/device/:serialNumber/configure",
+        function (schema, request) {
+          assert.deepEqual(JSON.parse(request.requestBody), {
+            ssid: "Network_1",
+            password: "Password_1",
+          });
+        }
+      );
+
+      await render(hbs`<NewSetup />`);
+      await goToApplyingSettingsStep({
+        networkName: "Network_1",
+        networkPassword: "Password_1",
+      });
+    });
+
+    test("when request fails it goes back to network name step and shows an error message", async function (assert) {
+      assert.expect(3);
+      const currentDeviceService = this.owner.lookup("service:currentDevice");
+      currentDeviceService.serialNumber = "1111-AAAA-BBBB";
+      this.server.post("/device/:serialNumber/configure", function () {
+        return new Response(400, {}, {});
+      });
+
+      await render(hbs`<NewSetup />`);
+      await goToPasswordStep();
+      await fillIn(
+        "[data-test-network-password] [data-test-input]",
+        "some password"
+      );
+
+      assert.dom("[data-test-network-name] [data-test-input]").doesNotExist();
+
+      await click("[data-test-confirm-button]");
+      await waitFor("[data-test-network-name] [data-test-input]");
+
+      assert.dom("[data-test-network-name] [data-test-input]").exists();
+      assert
+        .dom("[data-test-network-name] [data-test-input-error]")
+        .hasText(t("errors.somethingWentWrong"));
     });
   });
 });
