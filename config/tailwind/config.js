@@ -26,8 +26,10 @@ module.exports = {
       green: colors.emerald,
       blue: {
         ...colors.blue,
-        600: "#1E5FAB",
-        900: "#0C2644",
+        400: "var(--uc-blue-lighter)",
+        500: "var(--uc-blue)",
+        600: "var(--uc-blue-darker)",
+        900: "var(--uc-blue-dark)",
       },
       indigo: colors.indigo,
       purple: colors.violet,
@@ -708,7 +710,13 @@ module.exports = {
       1: "1",
       2: "2",
     },
-    textColor: (theme) => theme("colors"),
+    textColor: (theme) => {
+      return {
+        ...theme("colors"),
+        inverted: "var(--uc-text-inverted)",
+        "inverted-muted": "var(--uc-text-inverted-muted)",
+      };
+    },
     textOpacity: (theme) => theme("opacity"),
     transformOrigin: {
       center: "center",

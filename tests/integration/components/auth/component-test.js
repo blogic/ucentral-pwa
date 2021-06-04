@@ -4,7 +4,6 @@ import { render, fillIn, click } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import UcentralRouterAuthenticator from "ucentral/authenticators/ucentral-router";
-import confirmButtonStyles from "ucentral/components/uc/button.css";
 import RSVP from "rsvp";
 import { next } from "@ember/runloop";
 
@@ -89,7 +88,7 @@ module("Integration | Component | auth", function (hooks) {
     next(() => {
       assert
         .dom("[data-test-confirm-button]")
-        .hasClass(confirmButtonStyles["--loading"]);
+        .hasAttribute("aria-pressed", "true");
       assert.dom("[data-test-confirm-button]").hasAttribute("disabled");
       deferred.resolve();
     });

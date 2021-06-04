@@ -2,18 +2,61 @@
   @apply inline-block
     w-full h-11
     text-sm tracking-widest font-semibold uppercase
-    text-white;
+    text-inverted;
 
   border-radius: 21px;
-  background-image: linear-gradient(180deg, #226dc4 0%, #1e5fab 100%);
+  background-image:
+    linear-gradient(
+      to bottom,
+      var(--uc-blue) 0%,
+      var(--uc-blue-darker) 100%
+    );
+}
+
+.uc-button:focus,
+.uc-button:hover {
+  background-image:
+    linear-gradient(
+      to bottom,
+      var(--uc-blue-lighter) 0%,
+      var(--uc-blue) 100%
+    );
 }
 
 .uc-button:disabled {
-  @apply bg-gray-600;
+  @apply text-inverted-muted;
 
-  background-image: none;
+  background-image: linear-gradient(180deg, #c4c4c4 0%, #ababab 100%);
 }
 
-.uc-button.--loading {
-  @apply animate-pulse bg-yellow-400;
+.uc-button[aria-pressed="true"] {
+  --highlight: rgba(255, 255, 255, 0.15);
+  --transparent: rgba(255, 255, 255, 0);
+
+  @apply text-inverted-muted;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--transparent) 0%,
+      var(--highlight) 35%,
+      var(--transparent) 50%,
+      var(--transparent) 100%
+    ),
+    linear-gradient(to top, var(--uc-blue) 0%, var(--uc-blue-darker) 100%);
+  animation: button-pending 2.1s infinite linear;
+  background-size: 50% 100%, cover;
+  background-repeat: no-repeat, no-repeat;
+  user-select: none;
+  pointer-events: none;
+}
+
+@keyframes button-pending {
+  0% {
+    background-position: -50% 0, center;
+  }
+
+  100% {
+    background-position: 200% 0, center;
+  }
 }
