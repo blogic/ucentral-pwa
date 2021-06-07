@@ -162,7 +162,7 @@ module("Integration | Component | NewSetup", function (hooks) {
 
       test("has correct description", async function (assert) {
         const currentDeviceService = this.owner.lookup("service:currentDevice");
-        currentDeviceService.name = "Dummy";
+        currentDeviceService.data = { name: "Dummy" };
 
         await render(hbs`<NewSetup />`);
         await goToApplyingSettingsStep();
@@ -221,7 +221,7 @@ module("Integration | Component | NewSetup", function (hooks) {
       assert.expect(1);
 
       const currentDeviceService = this.owner.lookup("service:currentDevice");
-      currentDeviceService.serialNumber = "1111-AAAA-BBBB";
+      currentDeviceService.data = { serialNumber: "1111-AAAA-BBBB" };
       this.server.post(
         "/device/:serialNumber/configure",
         function (schema, request) {

@@ -51,10 +51,21 @@ module("Acceptance | authentication", function (hooks) {
 
   test("given user authenticated to a device with existing configuration, they are redirected to 'index'", async function (assert) {
     this.server.post("/authenticate", () => {
-      return new Response(200, {}, { succeeded: true });
+      return new Response(200, {}, { succeeded: true, serialNumber: "Dummy" });
     });
-    const currentDeviceService = this.owner.lookup("service:currentDevice");
-    currentDeviceService.isConfigured = true;
+    this.server.get("/device/:serialNumber", (schema, request) => {
+      if (request.params.serialNumber === "Dummy") {
+        return new Response(
+          200,
+          {},
+          {
+            configuration: "some-config",
+            serialNumber: "AAAA-CCCC",
+            name: "Dummy",
+          }
+        );
+      }
+    });
 
     await visit("/");
 
@@ -71,8 +82,19 @@ module("Acceptance | authentication", function (hooks) {
     this.server.post("/authenticate", () => {
       return new Response(200, {}, { succeeded: true });
     });
-    const currentDeviceService = this.owner.lookup("service:currentDevice");
-    currentDeviceService.isConfigured = false;
+    this.server.get("/device/:serialNumber", (schema, request) => {
+      if (request.params.serialNumber === "Dummy") {
+        return new Response(
+          200,
+          {},
+          {
+            configuration: "",
+            serialNumber: "AAAA-CCCC",
+            name: "Dummy",
+          }
+        );
+      }
+    });
     await visit("/");
 
     await fillIn("[data-test-ip-address] [data-test-input]", "192.168.1.2");

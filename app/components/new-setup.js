@@ -71,7 +71,7 @@ export default class NewSetupComponent extends Component {
   async configureDevice() {
     try {
       const response = await fetch(
-        `${ENV.APP.DEVICE_URL}/${this.currentDevice.serialNumber}/configure`,
+        `${ENV.APP.DEVICE_URL}/${this.currentDevice.data.serialNumber}/configure`,
         {
           method: "POST",
           body: JSON.stringify({
