@@ -35,6 +35,9 @@ module.exports = function (defaults) {
       plugins: cssModulesPlugins,
       includeExtensionInModulePath: true,
     },
+    fingerprint: {
+      replaceExtensions: ["html", "css", "js", "json"],
+    },
   });
 
   return app.toTree();
