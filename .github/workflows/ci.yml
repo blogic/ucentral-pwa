@@ -26,3 +26,16 @@ jobs:
     - uses: volta-cli/action@v1
     - run: yarn install
     - run: yarn test:ember
+
+  lighthouseci:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: volta-cli/action@v1
+      - run: yarn install
+      - run: yarn build
+      - run: yarn lhci autorun --collect.staticDistDir=./dist --collect.url=http://localhost/ --upload.target=temporary-public-storage
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
