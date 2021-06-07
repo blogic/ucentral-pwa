@@ -38,6 +38,7 @@ module.exports = function (defaults) {
     fingerprint: {
       replaceExtensions: ["html", "css", "js", "json"],
     },
+    sourcemaps: { enabled: true },
   });
 
   return app.toTree();
