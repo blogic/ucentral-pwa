@@ -1,0 +1,8 @@
+:root {
+  --uc-blue-lighter: #2b75cb;
+  --uc-blue: #226dc4;
+  --uc-blue-darker: #1e5fab;
+  --uc-blue-dark: #0c2644;
+  --uc-text-inverted: #fff;
+  --uc-text-inverted-muted: rgba(255, 255, 255, 0.7);
+}

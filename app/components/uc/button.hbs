@@ -1,7 +1,7 @@
 <button
   type="button"
-  local-class="uc-button {{if @isLoading "--loading"}}"
-  disabled={{@isLoading}}
+  local-class="uc-button"
+  aria-pressed={{if @isLoading "true" "false"}}
   data-test-button
   ...attributes
 >
