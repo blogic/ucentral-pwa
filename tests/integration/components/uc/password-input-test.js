@@ -1,8 +1,13 @@
 import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
-import { render, fillIn } from "@ember/test-helpers";
+import { render, fillIn, click } from "@ember/test-helpers";
 import { hbs } from "ember-cli-htmlbars";
 import inputStyles from "ucentral/components/uc/password-input.css";
+
+const PASSWORD_INPUT = "[data-test-password-input]";
+const PASSWORD_VISIBILITY_BUTTON = "[data-test-password-visibility]";
+const PASSWORD_VISIBLE_ICON = "[data-test-password-visible]";
+const PASSWORD_NOT_VISIBLE_ICON = "[data-test-password-not-visible]";
 
 module("Integration | Component | uc/password-input", function (hooks) {
   setupRenderingTest(hooks);
@@ -72,5 +77,42 @@ module("Integration | Component | uc/password-input", function (hooks) {
     await this.renderSubject();
 
     assert.dom("[data-test-password-input]").hasClass(inputStyles["--error"]);
+  });
+
+  test("password is hidden by default", async function (assert) {
+    await this.renderSubject();
+
+    assert.dom(PASSWORD_VISIBILITY_BUTTON).exists();
+    assert.dom(PASSWORD_VISIBLE_ICON).doesNotExist();
+    assert.dom(PASSWORD_NOT_VISIBLE_ICON).exists();
+
+    assert.dom(PASSWORD_INPUT).hasAttribute("type", "password");
+  });
+
+  test("when toggle is clicked, it renders password in visible state", async function (assert) {
+    await this.renderSubject();
+    await click(PASSWORD_VISIBILITY_BUTTON);
+
+    assert.dom(PASSWORD_VISIBILITY_BUTTON).exists();
+    assert.dom(PASSWORD_VISIBLE_ICON).exists();
+    assert.dom(PASSWORD_NOT_VISIBLE_ICON).doesNotExist();
+
+    assert.dom(PASSWORD_INPUT).hasAttribute("type", "text");
+  });
+
+  test("password visibility toggling", async function (assert) {
+    assert.expect(6);
+
+    await this.renderSubject();
+    assert.dom(PASSWORD_VISIBLE_ICON).doesNotExist();
+    assert.dom(PASSWORD_NOT_VISIBLE_ICON).exists();
+
+    await click(PASSWORD_VISIBILITY_BUTTON);
+    assert.dom(PASSWORD_VISIBLE_ICON).exists();
+    assert.dom(PASSWORD_NOT_VISIBLE_ICON).doesNotExist();
+
+    await click(PASSWORD_VISIBILITY_BUTTON);
+    assert.dom(PASSWORD_VISIBLE_ICON).doesNotExist();
+    assert.dom(PASSWORD_NOT_VISIBLE_ICON).exists();
   });
 });
