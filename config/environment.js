@@ -24,6 +24,12 @@ module.exports = function (environment) {
         "https://ucentral.dpaas.arilia.com:16001/api/v1/oauth2",
       DEVICE_URL: "https://ucentral.dpaas.arilia.com:16001/api/v1/device",
     },
+
+    "ember-cli-workbox": {
+      enabled: false,
+      debug: true,
+      autoRegister: true,
+    },
   };
 
   if (environment === "development") {
@@ -53,6 +59,10 @@ module.exports = function (environment) {
     // here you can enable a production-specific feature
     ENV["ember-cli-mirage"] = {
       enabled: true,
+    };
+    ENV["ember-cli-workbox"] = {
+      enabled: true,
+      debug: false,
     };
   }
 
