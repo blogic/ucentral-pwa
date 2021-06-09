@@ -1,0 +1,28 @@
+<Uc::LinkTile
+  @route="network-map.show"
+  @model={{@device.serialNumber}}
+  local-class="item"
+  data-test-item={{@device.serialNumber}}
+  {{did-insert (perform this.loadHealthChecksTask @device.serialNumber)}}
+>
+  <:icon> 
+    <Uc::DeviceWithStatus
+      @icon="/assets/images/icons/router.svg"
+      @health={{this.loadHealthChecksTask.lastSuccessful.value.values.lastObject.sanity}}
+    />
+  </:icon>
+
+  <:default>
+    <h4
+      local-class="item__location"
+      data-test-item-location
+    >
+      {{@device.location}}
+    </h4>
+    <h4
+      data-test-item-connected-devices
+    >
+      {{t "network_map.device.connected_devices" count=@device.connectedDevicesCount}}
+    </h4>
+  </:default>
+</Uc::LinkTile>

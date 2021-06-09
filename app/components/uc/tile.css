@@ -1,0 +1,11 @@
+.tile {
+  @apply border border-gray-light border-opacity-50 shadow-sm rounded-md text-center;
+}
+
+.title {
+  @apply text-blue-primary pb-3 pt-3 text-5xl capitalize;
+}
+
+.caption {
+  @apply text-blue-primary pb-2 block text-sm;
+}

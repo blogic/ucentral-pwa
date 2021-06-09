@@ -6,7 +6,6 @@ export default [
     macAddress: "00:1A:C1",
     location: "entrance",
     connectedDevicesCount: 13,
-    health: 85,
   },
   {
     UUID: "2-2",
@@ -15,7 +14,6 @@ export default [
     macAddress: "00:1A:C2",
     location: "meeting",
     connectedDevicesCount: 3,
-    health: 55,
   },
   {
     UUID: "3-3",
@@ -24,6 +22,5 @@ export default [
     macAddress: "00:1A:C3",
     location: "Office 1",
     connectedDevicesCount: 0,
-    health: 15,
   },
 ];

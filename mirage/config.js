@@ -46,17 +46,32 @@ export default function () {
     }
   );
 
-  this.get(`${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber`, function () {
-    return new Response(
-      200,
-      {},
-      {
-        configuration: "",
-        serialNumber: "AAAA-CCCC",
-        name: "Dummy",
+  this.get(
+    `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber`,
+    function (schema, request) {
+      if (request.params.serialNumber === "configured-serial") {
+        return new Response(
+          200,
+          {},
+          {
+            configuration: "true",
+            serialNumber: "AAAA-CCCC",
+            name: "Dummy",
+          }
+        );
       }
-    );
-  });
+
+      return new Response(
+        200,
+        {},
+        {
+          configuration: "",
+          serialNumber: "AAAA-CCCC",
+          name: "Dummy",
+        }
+      );
+    }
+  );
 
   this.get("/network-settings", function () {
     return new Response(
@@ -81,6 +96,27 @@ export default function () {
           serialNumber: request.params.serialNumber,
         })
       );
+    }
+  );
+  this.get(
+    `${ENV.APP.BASE_API_URL}/api/v1/devices`,
+    function (schema, request) {
+      const deviceTypeQP = request.queryParams.deviceType;
+      const countOnlyQP = request.queryParams.countOnly;
+
+      if (deviceTypeQP) {
+        return new Response(
+          200,
+          {},
+          schema.db.devices.where({ deviceType: deviceTypeQP }).toArray()
+        );
+      }
+
+      if (countOnlyQP) {
+        return new Response(200, {}, { deviceCount: schema.db.devices.length });
+      }
+
+      return new Response(200, {}, schema.db.devices.toArray());
     }
   );
 }

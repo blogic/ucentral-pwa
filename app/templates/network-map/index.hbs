@@ -1,3 +1,6 @@
 {{page-title "NetworkMap"}}
 
-<NetworkMap />
+<NetworkMap
+  @accessPoints={{@model.accessPoints}}
+  @deviceCount={{@model.totalDevices.deviceCount}}
+/>

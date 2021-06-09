@@ -1,0 +1,18 @@
+<div
+  local-class="tile"
+  data-test-tile
+  ...attributes
+>
+  <h1 
+    local-class="title"
+    data-test-tile-title
+  >
+    {{yield to="title"}}
+  </h1>
+  <p
+    local-class="caption"
+    data-test-tile-caption
+  >
+    {{yield to="caption"}}
+  </p>
+</div>
