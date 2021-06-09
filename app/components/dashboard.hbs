@@ -4,8 +4,8 @@
   <:description>{{t "dashboard.description"}}</:description>
   <:content as |content|>
     <content.Wrapper>
-      <Uc::LinkTile @route="index" @icon="/assets/images/icons/network.svg" local-class="item" data-test-button-network-map>
-        {{t "dashboard.viewNetworkMap"}}
+      <Uc::LinkTile @route="network-map.index" @icon="/assets/images/icons/network.svg" local-class="item" data-test-button-network-map>
+      {{t "dashboard.viewNetworkMap"}}
       </Uc::LinkTile>
       <Uc::LinkTile @route="qr-code" @icon="/assets/images/icons/qr-code.svg" local-class="item" data-test-button-qr-code>
         {{t "dashboard.viewQrCode"}}

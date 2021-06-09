@@ -12,4 +12,9 @@ Router.map(function () {
     this.route("new");
   });
   this.route("qr-code");
+
+  this.route("network-map", function () {
+    this.route("index", { path: "/" });
+    this.route("show", { path: "/:serial_number" });
+  });
 });
