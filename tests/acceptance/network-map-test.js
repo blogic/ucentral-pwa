@@ -193,4 +193,54 @@ module("Acceptance | network-map", function (hooks) {
         .hasText("Devices connected");
     });
   });
+
+  module("/Show", function () {
+    test("shows connected devices list", async function (assert) {
+      this.server.get(
+        `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber/connectedDevices`,
+        function () {
+          return [{ serialNumber: "1" }, { serialNumber: "2" }];
+        }
+      );
+
+      await authenticateSession({ serialNumber: "configured-serial" });
+      await visit("/network-map/TEST-TEST");
+
+      assert.dom("[data-test-device]").exists({ count: 2 });
+    });
+
+    test("shows connected devices sumnmary", async function (assert) {
+      this.server.get(
+        `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber`,
+        function () {
+          return new Response(200, {}, [
+            {
+              serialNumber: "TEST-SERIAL",
+              deviceType: "AP",
+            },
+          ]);
+        }
+      );
+      this.server.get(
+        `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber/connectedDevices`,
+        function () {
+          return [
+            {
+              serialNumber: "1",
+            },
+          ];
+        }
+      );
+
+      await authenticateSession({ serialNumber: "configured-serial" });
+      await visit("/network-map/TEST-SERIAL");
+
+      assert
+        .dom("[data-test-connected-devices-summary] [data-test-tile-title]")
+        .hasText("1");
+      assert
+        .dom("[data-test-connected-devices-summary] [data-test-tile-caption]")
+        .hasText("Devices connected");
+    });
+  });
 });

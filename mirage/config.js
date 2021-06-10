@@ -99,6 +99,24 @@ export default function () {
     }
   );
   this.get(
+    `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber`,
+    function (schema, request) {
+      const device = schema.db.devices.findBy({
+        serialNumber: request.params.serialNumber,
+      });
+
+      return new Response(200, {}, device);
+    }
+  );
+
+  this.get(
+    `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber/connectedDevices`,
+    function (schema) {
+      return new Response(200, {}, schema.db.devices.toArray());
+    }
+  );
+
+  this.get(
     `${ENV.APP.BASE_API_URL}/api/v1/devices`,
     function (schema, request) {
       const deviceTypeQP = request.queryParams.deviceType;

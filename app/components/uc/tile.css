@@ -3,9 +3,11 @@
 }
 
 .title {
-  @apply text-blue-primary pb-3 pt-3 text-5xl capitalize;
+  @apply text-blue-primary pt-3 text-5xl capitalize;
+
+  height: 4rem;
 }
 
 .caption {
-  @apply text-blue-primary pb-2 block text-sm;
+  @apply text-blue-primary pb-2 pt-5 block text-sm;
 }
