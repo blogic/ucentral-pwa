@@ -1,0 +1,7 @@
+.input {
+  @apply mb-11;
+}
+
+.spinner {
+  @apply mt-11;
+}

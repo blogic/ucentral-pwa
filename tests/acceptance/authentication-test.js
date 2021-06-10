@@ -17,21 +17,6 @@ module("Acceptance | authentication", function (hooks) {
     assert.equal(currentURL(), "/auth");
   });
 
-  test("given user entered correct credentials they are redirected to /dashboard", async function (assert) {
-    this.server.post("/authenticate", () => {
-      return new Response(200, {}, { succeeded: true });
-    });
-    await visit("/");
-
-    await fillIn("[data-test-ip-address] [data-test-input]", "192.168.1.2");
-    await click("[data-test-confirm-button]");
-
-    await fillIn("[data-test-password] [data-test-password-input]", "Secret");
-    await click("[data-test-confirm-button]");
-
-    assert.equal(currentURL(), "/");
-  });
-
   test("given user entered incorrect credentials they are not redirected", async function (assert) {
     assert.expect(2);
     this.server.post("/authenticate", () => {
@@ -62,5 +47,62 @@ module("Acceptance | authentication", function (hooks) {
 
     assert.equal(currentURL(), "/auth");
     assert.dom("[data-test-ip-address]").exists();
+  });
+
+  test("given user authenticated to a device with existing configuration, they are redirected to 'index'", async function (assert) {
+    this.server.post("/authenticate", () => {
+      return new Response(200, {}, { succeeded: true, serialNumber: "Dummy" });
+    });
+    this.server.get("/device/:serialNumber", (schema, request) => {
+      if (request.params.serialNumber === "Dummy") {
+        return new Response(
+          200,
+          {},
+          {
+            configuration: "some-config",
+            serialNumber: "AAAA-CCCC",
+            name: "Dummy",
+          }
+        );
+      }
+    });
+
+    await visit("/");
+
+    await fillIn("[data-test-ip-address] [data-test-input]", "192.168.1.2");
+    await click("[data-test-confirm-button]");
+
+    await fillIn("[data-test-password] [data-test-password-input]", "Secret");
+    await click("[data-test-confirm-button]");
+
+    assert.equal(currentURL(), "/");
+  });
+
+  test("given user authenticated to a device without existing configuration, they are redirected to 'new network setup'", async function (assert) {
+    this.server.post("/authenticate", () => {
+      return new Response(200, {}, { succeeded: true });
+    });
+    this.server.get("/device/:serialNumber", (schema, request) => {
+      if (request.params.serialNumber === "Dummy") {
+        return new Response(
+          200,
+          {},
+          {
+            configuration: "",
+            serialNumber: "AAAA-CCCC",
+            name: "Dummy",
+          }
+        );
+      }
+    });
+    await visit("/");
+
+    await fillIn("[data-test-ip-address] [data-test-input]", "192.168.1.2");
+    await click("[data-test-confirm-button]");
+
+    await fillIn("[data-test-password] [data-test-password-input]", "Secret");
+    await click("[data-test-confirm-button]");
+
+    assert.equal(currentURL(), "/network-setup/new");
   });
 });

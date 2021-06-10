@@ -1,0 +1,19 @@
+<ul local-class="progress">
+  {{#each this.steps as |step|}}
+    {{#if (eq step.type "dot")}}
+      <Uc::Progress::Dot
+        @isVisited={{step.isActive}}
+        data-test-dot={{step.index}}
+      >
+        {{step.order}}
+      </Uc::Progress::Dot>
+    {{/if}}
+
+    {{#if (eq step.type "strikethrough")}}
+      <Uc::Progress::Strikethrough
+        @isActive={{step.isActive}}
+        data-test-strikethrough={{step.index}} 
+      /> 
+    {{/if}}
+  {{/each}}
+</ul>

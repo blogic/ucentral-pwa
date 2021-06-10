@@ -1,0 +1,28 @@
+.dot {
+  @apply flex justify-center;
+
+  position: relative;
+  line-height: 31px;
+}
+
+.dot::before {
+  @apply bg-white
+    border rounded-full
+    text-center;
+
+  /* vertically centers text by setting line-height
+   * to the size of element and ofsetting that by border size */
+  min-width: 32px;
+  min-height: 32px;
+  content: "";
+  position: absolute;
+  z-index: -1;
+}
+
+.dot.--visited::before {
+  @apply bg-blue-600 border-blue-600;
+}
+
+.dot.--visited {
+  @apply text-white;
+}

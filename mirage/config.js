@@ -35,4 +35,20 @@ export default function () {
 
     return new Response(400, {}, {});
   });
+
+  this.post(`${ENV.APP.DEVICE_URL}/:serialNumber/configure`, function () {
+    return new Response(200, {}, {});
+  });
+
+  this.get(`${ENV.APP.DEVICE_URL}/:serialNumber`, function () {
+    return new Response(
+      200,
+      {},
+      {
+        configuration: "",
+        serialNumber: "AAAA-CCCC",
+        name: "Dummy",
+      }
+    );
+  });
 }
