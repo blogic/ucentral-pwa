@@ -32,6 +32,7 @@
     "@fullhuman/postcss-purgecss": "^4.0.3",
     "@glimmer/component": "^1.0.4",
     "@glimmer/tracking": "^1.0.4",
+    "@lhci/cli": "^0.8.0",
     "autoprefixer": "^10.2.5",
     "babel-eslint": "^10.1.0",
     "broccoli-asset-rev": "^3.0.0",
