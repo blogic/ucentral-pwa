@@ -39,6 +39,11 @@ module.exports = function (defaults) {
       replaceExtensions: ["html", "css", "js", "json"],
     },
     sourcemaps: { enabled: true },
+    workbox: {
+      globPatterns:
+        "**/*.{json,css,js,png,svg,eot,ttf,woff,jpg,gif,ico,xml,html,txt,ico}",
+      navigateFallback: "/index.html",
+    },
   });
 
   return app.toTree();
