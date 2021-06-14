@@ -1,0 +1,17 @@
+{{#let (or @health 100) as |deviceHealth|}}
+  <div
+    local-class="container"
+    data-test-device-with-status
+    ...attributes
+  >
+    <div>{{inline-svg @icon}}</div>
+    <span local-class="status
+      {{if (gte deviceHealth 80) "--green"
+        (if (gte deviceHealth 40) "--yellow"
+          (if (lt deviceHealth 40) "--red"
+        ))}}
+      "
+      data-test-status
+    ></span>
+  </div>
+{{/let}}

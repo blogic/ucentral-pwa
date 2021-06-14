@@ -1,0 +1,28 @@
+.container {
+  @apply bg-gradient-to-b from-button-start to-button-end p-3 inline-block rounded-lg flex-grow-0;
+
+  position: relative;
+}
+
+.status {
+  @apply border rounded-lg bg-green-400 border-white;
+
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  top: -2px;
+  right: -2px;
+  border-width: 2px;
+}
+
+.status.--green {
+  @apply bg-green-400;
+}
+
+.status.--yellow {
+  @apply bg-yellow-300;
+}
+
+.status.--red {
+  @apply bg-red-500;
+}
