@@ -70,4 +70,17 @@ export default function () {
       }
     );
   });
+
+  this.get(
+    `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber/healthchecks`,
+    function (schema, request) {
+      return new Response(
+        200,
+        {},
+        schema.db.healthchecks.findBy({
+          serialNumber: request.params.serialNumber,
+        })
+      );
+    }
+  );
 }
