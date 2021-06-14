@@ -1,5 +1,6 @@
 <div local-class="layout">
   <div local-class="layout__header">
+    {{yield to="navigation"}}
     {{yield to="logo"}}
     <h1 local-class="layout__title" data-test-layout-title>
       {{yield to="title"}}
