@@ -1,7 +1,6 @@
 # ucentral
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This is the uCentral network configuration app. It is a [Progressive web application](https://en.wikipedia.org/wiki/Progressive_web_application) built in [Ember.js](http://emberjs.com).
 
 ## Prerequisites
 
