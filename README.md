@@ -23,7 +23,6 @@ You will need the following things properly installed on your computer.
 * `yarn start`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 * In order to log-in use login: `192.168.1.1` password: `Secret`
-* Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
 
 ### Code Generators
 
