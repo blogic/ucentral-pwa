@@ -1,8 +1,6 @@
-<Uc::Layout local-class="layout">
+<Uc::Layout>
   <:navigation>
-    <div local-class="layout-navigation">  
-      <Uc::Layout::BackNavigation @route="network-map.index" />
-    </div>
+    <Uc::Layout::BackNavigation @route="network-map.index" />
   </:navigation>
 
   <:title>
@@ -12,36 +10,39 @@
     </p>
   </:title>
 
-  <:content>
-    <div local-class="summary">
-      <Uc::Tile
-        local-class="summary__item"
-        data-test-detail-summary
-        {{did-insert (perform this.loadHealthChecksTask @accessPoint.serialNumber)}}
-      >
-        <:title>
-          <Uc::DeviceWithStatus
-            @icon="/assets/images/icons/router.svg"
-            @health={{this.loadHealthChecksTask.lastSuccessful.value.values.lastObject.sanity}}
-          />
-        </:title>
-        <:caption>
-          {{t "network_map.detail.health"}}
-        </:caption>
-      </Uc::Tile>
+  <:content as |content|>
+    <content.Wrapper>
+      <div local-class="summary">
+        <Uc::Tile
+          local-class="summary__item"
+          data-test-detail-summary
+          {{did-insert (perform this.loadHealthChecksTask @accessPoint.serialNumber)}}
+        >
+          <:title>
+            <Uc::DeviceWithStatus
+              @icon="/assets/images/icons/router.svg"
+              @health={{this.loadHealthChecksTask.lastSuccessful.value.values.lastObject.sanity}}
+            />
+          </:title>
+          <:caption>
+            {{t "network_map.detail.health"}}
+          </:caption>
+        </Uc::Tile>
 
-      <Uc::Tile
-        local-class="summary__item"
-        data-test-connected-devices-summary
-      >
-        <:title>
-          {{or @connectedDevices.length 0}}
-        </:title>
-        <:caption>
-          {{t "network_map.connected_devices"}}
-        </:caption>
-      </Uc::Tile>
-    </div>
+        <Uc::Tile
+          local-class="summary__item"
+          data-test-connected-devices-summary
+        >
+          <:title>
+            {{or @connectedDevices.length 0}}
+          </:title>
+          <:caption>
+            {{t "network_map.connected_devices"}}
+          </:caption>
+        </Uc::Tile>
+      </div>
+    </content.Wrapper>
+
     <ul local-class="device-list">
       {{#each @connectedDevices as |device|}}
         <li data-test-device local-class="device-list__item">
@@ -52,4 +53,3 @@
     </ul>
   </:content>
 </Uc::Layout>
-

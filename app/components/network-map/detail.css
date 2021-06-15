@@ -7,15 +7,14 @@
 }
 
 .summary {
-  @apply flex p-4;
+  @apply flex;
 }
 
 .summary__item {
-  @apply inline-block flex-grow pt-4;
+  @apply inline-block flex-grow;
 
   box-sizing: content-box;
   min-width: 10.25rem;
-  min-height: 8rem;
 }
 
 .location-title {
@@ -43,12 +42,4 @@
 
 .device-list__item-name {
   @apply inline-block align-middle;
-}
-
-.layout {
-  padding: 0 !important;
-}
-
-.layout-navigation {
-  @apply p-4 pb-0 inline-block self-start;
 }

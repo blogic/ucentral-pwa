@@ -7,38 +7,41 @@
     {{t "network_map.title"}}
   </:title>
 
-  <:content>
-    <div
-      local-class="summary"
-    >
-      <Uc::Tile
-        local-class="summary__item"
-        data-test-access-points-summary
+  <:content as |content|>
+    <content.Wrapper>
+      <div
+        local-class="summary"
       >
-        <:title>
-          {{or @accessPoints.length 0}}
-        </:title>
-        <:caption>
-          {{t "network_map.access_points"}}
-        </:caption>
-      </Uc::Tile>
+        <Uc::Tile
+          local-class="summary__item"
+          data-test-access-points-summary
+        >
+          <:title>
+            {{or @accessPoints.length 0}}
+          </:title>
+          <:caption>
+            {{t "network_map.access_points"}}
+          </:caption>
+        </Uc::Tile>
 
-      <Uc::Tile
-        local-class="summary__item"
-        data-test-connected-devices-summary
-      >
-        <:title>
-          {{or @deviceCount 0}}
-        </:title>
-        <:caption>
-          {{t "network_map.connected_devices"}}
-        </:caption>
-      </Uc::Tile>
-    </div>
+        <Uc::Tile
+          local-class="summary__item"
+          data-test-connected-devices-summary
+        >
+          <:title>
+            {{or @deviceCount 0}}
+          </:title>
+          <:caption>
+            {{t "network_map.connected_devices"}}
+          </:caption>
+        </Uc::Tile>
+      </div>
 
-    {{#each @accessPoints as |device|}}
-      <NetworkMap::Item @device={{device}} />
-    {{/each}}
+      {{#each @accessPoints as |device|}}
+        <NetworkMap::Item @device={{device}} />
+      {{/each}}
+
+    </content.Wrapper>
   </:content>
 </Uc::Layout>
 
