@@ -20,6 +20,8 @@
     "lint:js:fix": "eslint . --fix",
     "lint:css": "stylelint 'app/**/*.css'",
     "lint:css:fix": "stylelint 'app/**/*.css' --fix",
+    "lint:md": "prettier --check '**/*md'",
+    "lint:md:fix": "prettier --write '**/*md'",
     "lint:intl": "ember-intl-analyzer .",
     "start": "ember serve --ssl=true",
     "test": "npm-run-all lint test:*",
