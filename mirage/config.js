@@ -26,21 +26,27 @@ export default function () {
     https://www.ember-cli-mirage.com/docs/route-handlers/shorthands
   */
 
-  this.post(ENV.APP.AUTHENTICATION_URL, function (schema, request) {
-    const payload = JSON.parse(request.requestBody);
+  this.post(
+    `${ENV.APP.BASE_API_URL}/api/v1/oauth2`,
+    function (schema, request) {
+      const payload = JSON.parse(request.requestBody);
 
-    if (payload.userId === "192.168.1.1" && payload.password === "Secret") {
-      return new Response(200, {}, { succeeded: true });
+      if (payload.userId === "192.168.1.1" && payload.password === "Secret") {
+        return new Response(200, {}, { succeeded: true });
+      }
+
+      return new Response(400, {}, {});
     }
+  );
 
-    return new Response(400, {}, {});
-  });
+  this.post(
+    `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
+    function () {
+      return new Response(200, {}, {});
+    }
+  );
 
-  this.post(`${ENV.APP.DEVICE_URL}/:serialNumber/configure`, function () {
-    return new Response(200, {}, {});
-  });
-
-  this.get(`${ENV.APP.DEVICE_URL}/:serialNumber`, function () {
+  this.get(`${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber`, function () {
     return new Response(
       200,
       {},

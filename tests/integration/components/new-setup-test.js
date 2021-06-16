@@ -7,6 +7,7 @@ import { setupIntl, t } from "ember-intl/test-support";
 import dotStyles from "ucentral/components/uc/progress/dot.css";
 import strikethroughStyles from "ucentral/components/uc/progress/strikethrough.css";
 import { Response } from "miragejs";
+import ENV from "ucentral/config/environment";
 
 const goToPasswordStep = async (networkName = "some name") => {
   await fillIn("[data-test-network-name] [data-test-input]", networkName);
@@ -143,9 +144,12 @@ module("Integration | Component | NewSetup", function (hooks) {
 
     module("APPLYING_SETTINGS", function (hooks) {
       hooks.beforeEach(function () {
-        this.server.post("/device/:serialNumber/configure", function () {
-          return new Response(200, {}, {});
-        });
+        this.server.post(
+          `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
+          function () {
+            return new Response(200, {}, {});
+          }
+        );
       });
 
       test("has correct title", async function (assert) {
@@ -209,9 +213,12 @@ module("Integration | Component | NewSetup", function (hooks) {
   module("Configure device", function () {
     test("request is sent", async function (assert) {
       assert.expect(1);
-      this.server.post("/device/:serialNumber/configure", function () {
-        assert.ok(true, "sent request");
-      });
+      this.server.post(
+        `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
+        function () {
+          assert.ok(true, "sent request");
+        }
+      );
 
       await render(hbs`<NewSetup />`);
       await goToApplyingSettingsStep();
@@ -223,7 +230,7 @@ module("Integration | Component | NewSetup", function (hooks) {
       const currentDeviceService = this.owner.lookup("service:currentDevice");
       currentDeviceService.data = { serialNumber: "1111-AAAA-BBBB" };
       this.server.post(
-        "/device/:serialNumber/configure",
+        `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
         function (schema, request) {
           assert.equal(request.params.serialNumber, "1111-AAAA-BBBB");
         }
@@ -239,7 +246,7 @@ module("Integration | Component | NewSetup", function (hooks) {
       const currentDeviceService = this.owner.lookup("service:currentDevice");
       currentDeviceService.serialNumber = "1111-AAAA-BBBB";
       this.server.post(
-        "/device/:serialNumber/configure",
+        `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
         function (schema, request) {
           assert.deepEqual(JSON.parse(request.requestBody), {
             ssid: "Network_1",
@@ -259,9 +266,12 @@ module("Integration | Component | NewSetup", function (hooks) {
       assert.expect(3);
       const currentDeviceService = this.owner.lookup("service:currentDevice");
       currentDeviceService.serialNumber = "1111-AAAA-BBBB";
-      this.server.post("/device/:serialNumber/configure", function () {
-        return new Response(400, {}, {});
-      });
+      this.server.post(
+        `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
+        function () {
+          return new Response(400, {}, {});
+        }
+      );
 
       await render(hbs`<NewSetup />`);
       await goToPasswordStep();

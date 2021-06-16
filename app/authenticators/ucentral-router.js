@@ -11,10 +11,13 @@ export default class UcentralRouterAuthenticator extends Base {
   }
 
   async authenticate(userId, password) {
-    const authenticateResponse = await fetch(ENV.APP.AUTHENTICATION_URL, {
-      method: "POST",
-      body: JSON.stringify({ userId, password }),
-    });
+    const authenticateResponse = await fetch(
+      `${ENV.APP.BASE_API_URL}/api/v1/oauth2`,
+      {
+        method: "POST",
+        body: JSON.stringify({ userId, password }),
+      }
+    );
 
     if (!authenticateResponse.ok) {
       throw authenticateResponse;

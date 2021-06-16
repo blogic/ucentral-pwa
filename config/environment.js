@@ -20,9 +20,7 @@ module.exports = function (environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      AUTHENTICATION_URL:
-        "https://ucentral.dpaas.arilia.com:16001/api/v1/oauth2",
-      DEVICE_URL: "https://ucentral.dpaas.arilia.com:16001/api/v1/device",
+      BASE_API_URL: "https://ucentral.dpaas.arilia.com:16001",
     },
 
     "ember-cli-workbox": {
@@ -51,8 +49,7 @@ module.exports = function (environment) {
     ENV.APP.rootElement = "#ember-testing";
     ENV.APP.autoboot = false;
 
-    ENV.APP.AUTHENTICATION_URL = "/authenticate";
-    ENV.APP.DEVICE_URL = "/device";
+    ENV.APP.BASE_API_URL = "http://localhost:4200";
   }
 
   if (environment === "production") {
