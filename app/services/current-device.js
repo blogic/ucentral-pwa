@@ -14,7 +14,7 @@ export default class CurrentDeviceService extends Service {
 
   async load() {
     const deviceResponse = await fetch(
-      `${ENV.APP.DEVICE_URL}/${this.session.data.authenticated.serialNumber}`
+      `${ENV.APP.BASE_API_URL}/api/v1/device/${this.session.data.authenticated.serialNumber}`
     );
     const device = await deviceResponse.json();
 

@@ -2,6 +2,7 @@ import { module, test } from "qunit";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupTest } from "ember-qunit";
 import { Response } from "miragejs";
+import ENV from "ucentral/config/environment";
 
 module("Unit | Authenticator | UcentralRouterAuthenticator", function (hooks) {
   setupTest(hooks);
@@ -13,7 +14,7 @@ module("Unit | Authenticator | UcentralRouterAuthenticator", function (hooks) {
 
   test("#authenticate makes a request", async function (assert) {
     assert.expect(1);
-    this.server.post("/authenticate", () => {
+    this.server.post(`${ENV.APP.BASE_API_URL}/api/v1/oauth2`, () => {
       assert.ok(true, "successfuly hit authenticate endpoint");
       return [200, {}, "{}"];
     });
@@ -23,20 +24,23 @@ module("Unit | Authenticator | UcentralRouterAuthenticator", function (hooks) {
 
   test("#authenticate sends payload", async function (assert) {
     assert.expect(1);
-    this.server.post("/authenticate", (schema, request) => {
-      assert.deepEqual(JSON.parse(request.requestBody), {
-        userId: "192.168.1.1",
-        password: "Secret",
-      });
-      return new Response(200, {}, {});
-    });
+    this.server.post(
+      `${ENV.APP.BASE_API_URL}/api/v1/oauth2`,
+      (schema, request) => {
+        assert.deepEqual(JSON.parse(request.requestBody), {
+          userId: "192.168.1.1",
+          password: "Secret",
+        });
+        return new Response(200, {}, {});
+      }
+    );
 
     await this.authenticator.authenticate("192.168.1.1", "Secret");
   });
 
   test("#authenticate payload on success is returned", async function (assert) {
     assert.expect(1);
-    this.server.post("/authenticate", () => {
+    this.server.post(`${ENV.APP.BASE_API_URL}/api/v1/oauth2`, () => {
       return new Response(200, {}, { succeeded: true });
     });
 
@@ -44,13 +48,12 @@ module("Unit | Authenticator | UcentralRouterAuthenticator", function (hooks) {
       userId: "192.168.1.1",
       password: "Secret",
     });
-
     assert.deepEqual(data, { succeeded: true });
   });
 
   test("#authenticate rejects on bad request", async function (assert) {
     assert.expect(1);
-    this.server.post("/authenticate", () => {
+    this.server.post(`${ENV.APP.BASE_API_URL}/api/v1/oauth2`, () => {
       return new Response(400, {}, {});
     });
 
