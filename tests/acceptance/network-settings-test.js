@@ -61,6 +61,25 @@ module("Acceptance | network-settings", function (hooks) {
     assert.equal(currentURL(), "/network-settings");
   });
 
+  test("when network name change succeeds it redirects to 'network-settings", async function (assert) {
+    this.server.post(
+      `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
+      function () {
+        return new Response(200, {}, {});
+      }
+    );
+    await authenticateSession({ serialNumber: "configured-serial" });
+    await visit("/network-settings/network-name");
+    await fillIn(
+      "[data-test-network-name] [data-test-input]",
+      "New network name"
+    );
+
+    await click("[data-test-confirm-button]");
+
+    assert.equal(currentURL(), "/network-settings/success");
+  });
+
   test("when 'change network password' is clicked it redirects to network-settings.network-password", async function (assert) {
     await authenticateSession({ serialNumber: "configured-serial" });
     await visit("/network-settings");

@@ -69,6 +69,11 @@
       "title": "Success!",
       "description": "Your <b>{deviceName}</b> mesh network has been updated. Connect via your device's settings.",
       "view_dashboard": "View network dashboard"
+    },
+    "wifi_name": {
+      "title": "Change network name",
+      "label": "Network name",
+      "submit": "Change name"
     }
   }
 }
