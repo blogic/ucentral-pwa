@@ -4,12 +4,18 @@ import fetch from "fetch";
 
 export default class HttpService extends Service {
   get(url, queryParams, headers) {
-    return this.request(url, queryParams, headers);
+    return this.request("GET", url, queryParams, headers);
   }
 
-  request(urlString, queryParams, headers) {
+  post(url, body, headers, queryParams) {
+    return this.request("POST", url, queryParams, headers, body);
+  }
+
+  request(method, urlString, queryParams, headers, body) {
     return fetch(this.createUrl(urlString, queryParams), {
+      method,
       headers,
+      body,
     });
   }
 

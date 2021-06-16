@@ -94,4 +94,43 @@ module("Unit | Service | http", function (hooks) {
       this.subject.get("/sampleGet", { count: 0 }, { "X-UC-ID": "some id" });
     });
   });
+
+  module("POST", function () {
+    test("sends request", async function (assert) {
+      assert.expect(1);
+      this.server.post(`${ENV.APP.BASE_API_URL}/samplePost`, function () {
+        assert.ok(true);
+      });
+
+      await this.subject.post("/samplePost");
+    });
+
+    test("sends request with body", async function (assert) {
+      assert.expect(1);
+      this.server.post(
+        `${ENV.APP.BASE_API_URL}/samplePost`,
+        function (schema, request) {
+          assert.deepEqual(JSON.parse(request.requestBody), { count: 0 });
+        }
+      );
+
+      await this.subject.post("/samplePost", JSON.stringify({ count: 0 }));
+    });
+
+    test("sends request headers", async function (assert) {
+      assert.expect(1);
+      this.server.post(
+        `${ENV.APP.BASE_API_URL}/samplePost`,
+        function (schema, request) {
+          assert.equal(request.requestHeaders["X-UC-ID"], "some id");
+        }
+      );
+
+      await this.subject.post(
+        "/samplePost",
+        { count: 0 },
+        { "X-UC-ID": "some id" }
+      );
+    });
+  });
 });
