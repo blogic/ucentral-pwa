@@ -1,11 +1,12 @@
 import { module, test } from "qunit";
-import { visit, currentURL, click } from "@ember/test-helpers";
+import { visit, currentURL, click, fillIn } from "@ember/test-helpers";
 import { setupApplicationTest } from "ember-qunit";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import {
   authenticateSession,
   invalidateSession,
 } from "ember-simple-auth/test-support";
+import ENV from "ucentral/config/environment";
 
 module("Acceptance | network-settings", function (hooks) {
   setupApplicationTest(hooks);
@@ -96,5 +97,32 @@ module("Acceptance | network-settings", function (hooks) {
     await click("[data-test-button-back]");
 
     assert.equal(currentURL(), "/network-settings");
+  });
+
+  test("when password change succeeds it redirects to 'network-settings", async function (assert) {
+    this.server.post(
+      `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
+      function () {
+        return new Response(200, {}, {});
+      }
+    );
+    await authenticateSession({ serialNumber: "configured-serial" });
+    await visit("/network-settings/network-password");
+    await fillIn(
+      "[data-test-network-password-current] [data-test-password-input]",
+      "Old Password"
+    );
+    await fillIn(
+      "[data-test-network-password] [data-test-password-input]",
+      "New Password"
+    );
+    await fillIn(
+      "[data-test-network-password-repeat] [data-test-password-input]",
+      "New Password"
+    );
+
+    await click("[data-test-confirm-button]");
+
+    assert.equal(currentURL(), "/network-settings/success");
   });
 });

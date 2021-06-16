@@ -74,6 +74,16 @@
       "title": "Change network name",
       "label": "Network name",
       "submit": "Change name"
+    },
+    "wifi_password": {
+      "title": "Change network password",
+      "submit": "Change password",
+      "current_password_label": "Current network password",
+      "new_password_label": "New network password",
+      "repeat_new_password_label": "Repeat new network password",
+      "errors": {
+        "password_not_matching": "Passwords don't match"
+      }
     }
   }
 }
