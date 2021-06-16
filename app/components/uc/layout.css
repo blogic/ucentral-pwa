@@ -1,6 +1,5 @@
 .layout {
   @apply
-    p-4
     bg-gradient-to-b from-background-start to-background-end
     h-screen
     w-screen
@@ -12,7 +11,7 @@
   @apply
     flex flex-grow flex-col
     items-center
-    mb-6
+    p-4
   ;
 }
 
@@ -21,7 +20,7 @@
     mt-5
     pb-2
     font-semibold
-    text-xl text-blue-900
+    text-xl text-blue-900 text-center
   ;
 }
 

@@ -10,7 +10,5 @@
     </p>
   </div>
 
-  <div>
-    {{yield to="content"}}
-  </div>
+  {{yield (hash Wrapper=(component "uc/layout/content-wrapper")) to="content"}}
 </div>

@@ -34,52 +34,54 @@
     {{/if}}
   </:description>
 
-  <:content>
-    <main>
-      <form
-        {{on "submit" (perform this.submitTask)}}
-      >
-        {{#if this.isNetworkNameStep}}
-          <Uc::Input
-            local-class="input"
-            @label={{t "network_setup.wifi_name.label"}}
-            @value={{this.networkName}}
-            @onInput={{this.handleNetworkName}}
-            @errorMessage={{this.submitTask.last.value.errorMessage}}
-            @isError={{this.submitTask.last.value.errorMessage}}
-            data-test-network-name
-          />
-          <Uc::Button
-            disabled={{this.isNetworkNameConfirmDisabled}}
-            data-test-confirm-button
-            type="submit"
-          >
-            {{t "actions.next"}}
-          </Uc::Button>
-        {{/if}}
+  <:content as |content|>
+    <content.Wrapper>
+      <main>
+        <form
+          {{on "submit" (perform this.submitTask)}}
+        >
+          {{#if this.isNetworkNameStep}}
+            <Uc::Input
+              local-class="input"
+              @label={{t "network_setup.wifi_name.label"}}
+              @value={{this.networkName}}
+              @onInput={{this.handleNetworkName}}
+              @errorMessage={{this.submitTask.last.value.errorMessage}}
+              @isError={{this.submitTask.last.value.errorMessage}}
+              data-test-network-name
+            />
+            <Uc::Button
+              disabled={{this.isNetworkNameConfirmDisabled}}
+              data-test-confirm-button
+              type="submit"
+            >
+              {{t "actions.next"}}
+            </Uc::Button>
+          {{/if}}
 
-        {{#if this.isNetworkPasswordStep}}
-          <Uc::Input
-            local-class="input"
-            @label={{t "network_setup.wifi_password.label"}}
-            @value={{this.networkPassword}}
-            @onInput={{this.handleNetworkPassword}}
-            data-test-network-password
-          />
+          {{#if this.isNetworkPasswordStep}}
+            <Uc::Input
+              local-class="input"
+              @label={{t "network_setup.wifi_password.label"}}
+              @value={{this.networkPassword}}
+              @onInput={{this.handleNetworkPassword}}
+              data-test-network-password
+            />
 
-          <Uc::Button
-            disabled={{this.isNetworkPasswordConfirmDisabled}}
-            data-test-confirm-button
-            type="submit"
-          >
-            {{t "network_setup.confirm"}}
-          </Uc::Button>
-        {{/if}}
+            <Uc::Button
+              disabled={{this.isNetworkPasswordConfirmDisabled}}
+              data-test-confirm-button
+              type="submit"
+            >
+              {{t "network_setup.confirm"}}
+            </Uc::Button>
+          {{/if}}
 
-        {{#if this.isApplyingSettingsStep}}
-          <Uc::Spinner local-class="spinner" data-test-spinner />
-        {{/if}}
-      </form>
-    </main>
+          {{#if this.isApplyingSettingsStep}}
+            <Uc::Spinner local-class="spinner" data-test-spinner />
+          {{/if}}
+        </form>
+      </main>
+    </content.Wrapper>
   </:content>
 </Uc::Layout>
