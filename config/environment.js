@@ -23,6 +23,7 @@ module.exports = function (environment) {
       AUTHENTICATION_URL:
         "https://ucentral.dpaas.arilia.com:16001/api/v1/oauth2",
       DEVICE_URL: "https://ucentral.dpaas.arilia.com:16001/api/v1/device",
+      BASE_API_URL: "https://ucentral.dpaas.arilia.com:16001",
     },
 
     "ember-cli-workbox": {
@@ -53,6 +54,7 @@ module.exports = function (environment) {
 
     ENV.APP.AUTHENTICATION_URL = "/authenticate";
     ENV.APP.DEVICE_URL = "/device";
+    ENV.APP.BASE_API_URL = "http://localhost:4200";
   }
 
   if (environment === "production") {
