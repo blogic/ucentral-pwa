@@ -1,0 +1,45 @@
+.item {
+  @apply mb-5;
+}
+
+.item__location {
+  @apply capitalize font-bold;
+}
+
+.summary {
+  @apply flex;
+}
+
+.summary__item {
+  @apply inline-block flex-grow;
+
+  box-sizing: content-box;
+  min-width: 10.25rem;
+}
+
+.location-title {
+  @apply capitalize;
+}
+
+.icon {
+  @apply bg-gradient-to-b from-button-start to-button-end inline-block p-3 rounded-lg flex-grow-0;
+}
+
+.summary__item:first-child {
+  @apply mr-3;
+}
+
+.device-list__item {
+  @apply p-2 border-t;
+
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.device-list__item-icon {
+  @apply inline-block ml-5 mr-4 align-middle;
+}
+
+.device-list__item-name {
+  @apply inline-block align-middle;
+}

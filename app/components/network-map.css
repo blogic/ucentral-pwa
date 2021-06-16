@@ -1,0 +1,14 @@
+.summary {
+  @apply flex pb-5;
+}
+
+.summary__item {
+  @apply inline-block flex-grow;
+
+  box-sizing: content-box;
+  min-width: 10.25rem;
+}
+
+.summary__item:first-child {
+  @apply mr-3;
+}

@@ -28,6 +28,18 @@
     },
     "incorrect_credentials": "Incorrect IP Address or Password"
   },
+  "network_map": {
+    "title": "Network map and connected devices",
+    "access_points": "Access points",
+    "connected_devices": "Devices connected",
+    "device": {
+      "connected_devices": "{count} devices connected"
+    },
+    "detail": {
+      "health": "Network health",
+      "title": "Access point:"
+    }
+  },
   "qr_code": {
     "title": "QR code",
     "description": "Use this QR code to connect other devices to the {ssid} network",

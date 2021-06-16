@@ -1,0 +1,7 @@
+.item {
+  @apply mb-5;
+}
+
+.item__location {
+  @apply capitalize font-bold;
+}
