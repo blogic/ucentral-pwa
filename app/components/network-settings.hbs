@@ -1,0 +1,16 @@
+<Uc::Layout>
+  <:navigation><Uc::Layout::BackNavigation @route="index" /></:navigation>
+  <:title>{{t "network_settings.title"}}</:title>
+  <:description>{{t "network_settings.description" deviceName=this.currentDevice.data.name htmlSafe=true}}</:description>
+  <:content as |content|>
+    <content.Wrapper>
+      <Uc::LinkTile @route="network-settings.network-name" @icon="/assets/images/icons/square.svg" local-class="item" data-test-button-network-name>
+        {{t "network_settings.change_network_name"}}
+      </Uc::LinkTile>
+
+      <Uc::LinkTile @route="network-settings.network-password" @icon="/assets/images/icons/square.svg" local-class="item" data-test-button-network-password>
+        {{t "network_settings.change_network_password"}}
+      </Uc::LinkTile>
+    </content.Wrapper>
+  </:content>
+</Uc::Layout>

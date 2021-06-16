@@ -17,4 +17,9 @@ Router.map(function () {
     this.route("index", { path: "/" });
     this.route("show", { path: "/:serial_number" });
   });
+
+  this.route("network-settings", function () {
+    this.route("network-password");
+    this.route("network-name");
+  });
 });
