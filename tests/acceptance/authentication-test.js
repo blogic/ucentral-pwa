@@ -52,7 +52,7 @@ module("Acceptance | authentication", function (hooks) {
 
   test("given user authenticated to a device with existing configuration, they are redirected to 'index'", async function (assert) {
     this.server.post(`${ENV.APP.BASE_API_URL}/api/v1/oauth2`, () => {
-      return new Response(200, {}, { succeeded: true, serialNumber: "Dummy" });
+      return new Response(200, {}, { serialNumber: "Dummy" });
     });
     this.server.get(
       `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber`,
@@ -84,7 +84,7 @@ module("Acceptance | authentication", function (hooks) {
 
   test("given user authenticated to a device without existing configuration, they are redirected to 'new network setup'", async function (assert) {
     this.server.post(`${ENV.APP.BASE_API_URL}/api/v1/oauth2`, () => {
-      return new Response(200, {}, { succeeded: true });
+      return new Response(200, {}, { serialNumber: "AAAA-CCCC" });
     });
     this.server.get(
       `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber`,
