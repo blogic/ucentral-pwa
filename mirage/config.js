@@ -79,23 +79,9 @@ export default function () {
   this.get(
     `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber`,
     function (schema, request) {
-      const foundDevice = schema.db.devices.findBy({
+      return schema.db.devices.findBy({
         serialNumber: request.params.serialNumber,
       });
-
-      if (foundDevice) {
-        return new Response(200, {}, foundDevice);
-      }
-
-      return new Response(
-        200,
-        {},
-        {
-          configuration: "",
-          serialNumber: "AAAA-CCCC",
-          name: "Dummy",
-        }
-      );
     }
   );
 
