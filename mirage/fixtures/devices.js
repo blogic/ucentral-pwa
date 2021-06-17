@@ -23,4 +23,25 @@ export default [
     location: "Office 1",
     connectedDevicesCount: 0,
   },
+  {
+    UUID: "4-4",
+    serialNumber: "configured-serial",
+    deviceType: "AP",
+    macAddress: "00:1A:C4",
+    location: "Office 2",
+    connectedDevicesCount: 0,
+    configuration: JSON.stringify({
+      ssid: "Some SSID",
+      password: "Secret",
+      encryption: "wpa2",
+    }),
+  },
+  {
+    UUID: "5-5",
+    serialNumber: "unconfigured-serial",
+    deviceType: "AP",
+    macAddress: "00:1A:C5",
+    location: "Office 3",
+    connectedDevicesCount: 0,
+  },
 ];
