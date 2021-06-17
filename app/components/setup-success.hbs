@@ -1,0 +1,16 @@
+<Uc::Layout>
+  <:title>
+    {{t "network_setup.success.title"}}
+  </:title>
+
+  <:description>
+    {{t "network_setup.success.description" deviceName=this.currentDevice.data.name htmlSafe=true}}
+  </:description>
+
+  <:content as |content|>
+    <content.Wrapper>
+      <main>
+      </main>
+    </content.Wrapper>
+  </:content>
+</Uc::Layout>
