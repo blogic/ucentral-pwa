@@ -1,0 +1,16 @@
+<Uc::Layout>
+  <:logo>
+    <div local-class="icon">
+      {{inline-svg "/assets/images/icons/arrow-left-circle.svg"}}
+    </div>
+  </:logo>
+  <:title>{{t "network_settings.success.title"}}</:title>
+  <:description>{{t "network_settings.success.description" deviceName=this.currentDevice.data.name htmlSafe=true}}</:description>
+  <:content as |content|>
+    <content.Wrapper>
+      <LinkTo @route="index">
+        <Uc::Button>{{t "network_settings.success.view_dashboard"}}</Uc::Button>
+      </LinkTo>
+    </content.Wrapper>
+  </:content>
+</Uc::Layout>

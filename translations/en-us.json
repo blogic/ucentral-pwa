@@ -61,5 +61,29 @@
       "title": "Just a moment, we're applying your settings",
       "description": "Your <b>{deviceName}</b> mesh network is getting started..."
     }
+  },
+  "network_settings": {
+    "title": "Edit settings",
+    "description": "Edit your <b>{deviceName}</b> mesh network settings",
+    "success": {
+      "title": "Success!",
+      "description": "Your <b>{deviceName}</b> mesh network has been updated. Connect via your device's settings.",
+      "view_dashboard": "View network dashboard"
+    },
+    "wifi_name": {
+      "title": "Change network name",
+      "label": "Network name",
+      "submit": "Change name"
+    },
+    "wifi_password": {
+      "title": "Change network password",
+      "submit": "Change password",
+      "current_password_label": "Current network password",
+      "new_password_label": "New network password",
+      "repeat_new_password_label": "Repeat new network password",
+      "errors": {
+        "password_not_matching": "Passwords don't match"
+      }
+    }
   }
 }

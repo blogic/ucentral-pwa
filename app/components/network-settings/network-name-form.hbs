@@ -1,0 +1,27 @@
+<Uc::Layout>
+  <:title>{{t "network_settings.wifi_name.title"}}</:title>
+  <:navigation><Uc::Layout::BackNavigation @route="network-settings" /></:navigation>
+
+  <:content as |content|>
+    <content.Wrapper>
+      <form {{on "submit" (perform this.submitTask)}}> 
+        <Uc::Input
+          local-class="input"
+          @label={{t "network_settings.wifi_name.label"}}
+          @value={{this.networkName}}
+          @onInput={{this.handleNetworkName}}
+          @errorMessage={{this.submitTask.last.value.errorMessage}}
+          @isError={{this.submitTask.last.value.errorMessage}}
+          data-test-network-name
+        />
+        <Uc::Button
+          @isLoading={{this.submitTask.isRunning}}
+          data-test-confirm-button
+          type="submit"
+        >
+          {{t "network_settings.wifi_name.submit"}}
+        </Uc::Button>
+      </form>
+    </content.Wrapper>
+  </:content>
+</Uc::Layout>
