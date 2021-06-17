@@ -1,6 +1,7 @@
 import { module, test } from "qunit";
 import { setupRenderingTest } from "ember-qunit";
 import { render, fillIn, click, waitFor } from "@ember/test-helpers";
+import Service from "@ember/service";
 import { hbs } from "ember-cli-htmlbars";
 import { setupMirage } from "ember-cli-mirage/test-support";
 import { setupIntl, t } from "ember-intl/test-support";
@@ -30,6 +31,15 @@ module("Integration | Component | NewSetup", function (hooks) {
   setupRenderingTest(hooks);
   setupMirage(hooks);
   setupIntl(hooks);
+
+  hooks.beforeEach(function () {
+    this.owner.register(
+      "service:router",
+      class MockRouterService extends Service {
+        transitionTo() {}
+      }
+    );
+  });
 
   module("Steps", function () {
     module("NETWORK_NAME", function () {
@@ -298,6 +308,33 @@ module("Integration | Component | NewSetup", function (hooks) {
       assert
         .dom("[data-test-network-name] [data-test-input-error]")
         .hasText(t("errors.somethingWentWrong"));
+    });
+
+    test("when request succeeds it transitions to the network-setup.success route", async function (assert) {
+      assert.expect(1);
+      this.owner.register(
+        "service:router",
+        class MockRouterService extends Service {
+          transitionTo(route) {
+            assert.equal(route, "network-setup.success");
+          }
+        }
+      );
+
+      this.server.post(
+        `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
+        function () {
+          return new Response(200, {}, {});
+        }
+      );
+
+      await render(hbs`<NewSetup />`);
+      await goToPasswordStep();
+      await fillIn(
+        "[data-test-network-password] [data-test-input]",
+        "some password"
+      );
+      await click("[data-test-confirm-button]");
     });
   });
 });

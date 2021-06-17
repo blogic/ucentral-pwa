@@ -13,6 +13,7 @@ const STEPS = {
 export default class NewSetupComponent extends Component {
   @service currentDevice;
   @service intl;
+  @service router;
 
   @tracked networkName = "";
   @tracked networkPassword = "";
@@ -62,8 +63,10 @@ export default class NewSetupComponent extends Component {
 
       if (!configureDeviceResponse.ok) {
         this.goToStep(STEPS.NETWORK_NAME);
+        return configureDeviceResponse;
       }
-      return configureDeviceResponse;
+
+      this.router.transitionTo("network-setup.success");
     }
   }
 
