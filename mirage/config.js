@@ -32,7 +32,25 @@ export default function () {
       const payload = JSON.parse(request.requestBody);
 
       if (payload.userId === "192.168.1.1" && payload.password === "Secret") {
-        return new Response(200, {}, { serialNumber: "AAAA-CCCC" });
+        return new Response(
+          200,
+          {},
+          {
+            succeeded: true,
+            serialNumber: "configured-serial",
+          }
+        );
+      }
+
+      if (payload.userId === "192.168.1.3" && payload.password === "Secret") {
+        return new Response(
+          200,
+          {},
+          {
+            succeeded: true,
+            serialNumber: "unconfigured-serial",
+          }
+        );
       }
 
       return new Response(400, {}, {});
@@ -49,16 +67,12 @@ export default function () {
   this.get(
     `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber`,
     function (schema, request) {
-      if (request.params.serialNumber === "configured-serial") {
-        return new Response(
-          200,
-          {},
-          {
-            configuration: "true",
-            serialNumber: "AAAA-CCCC",
-            name: "Dummy",
-          }
-        );
+      const foundDevice = schema.db.devices.findBy({
+        serialNumber: request.params.serialNumber,
+      });
+
+      if (foundDevice) {
+        return new Response(200, {}, foundDevice);
       }
 
       return new Response(
@@ -98,6 +112,7 @@ export default function () {
       );
     }
   );
+
   this.get(
     `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber`,
     function (schema, request) {
