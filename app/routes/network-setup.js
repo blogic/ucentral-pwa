@@ -3,8 +3,13 @@ import { inject as service } from "@ember/service";
 
 export default class NetworkSetupRoute extends Route {
   @service session;
+  @service currentDevice;
 
   beforeModel(transition) {
     this.session.requireAuthentication(transition, "auth");
+  }
+
+  model() {
+    return this.currentDevice.load();
   }
 }
