@@ -8,6 +8,7 @@ import dotStyles from "ucentral/components/uc/progress/dot.css";
 import strikethroughStyles from "ucentral/components/uc/progress/strikethrough.css";
 import { Response } from "miragejs";
 import ENV from "ucentral/config/environment";
+import { authenticateSession } from "ember-simple-auth/test-support";
 
 const goToPasswordStep = async (networkName = "some name") => {
   await fillIn("[data-test-network-name] [data-test-input]", networkName);
@@ -227,8 +228,7 @@ module("Integration | Component | NewSetup", function (hooks) {
     test("request is sent with correct serial number", async function (assert) {
       assert.expect(1);
 
-      const currentDeviceService = this.owner.lookup("service:currentDevice");
-      currentDeviceService.data = { serialNumber: "1111-AAAA-BBBB" };
+      await authenticateSession({ serialNumber: "1111-AAAA-BBBB" });
       this.server.post(
         `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
         function (schema, request) {
@@ -243,14 +243,15 @@ module("Integration | Component | NewSetup", function (hooks) {
     test("request receives ssid and password in payload", async function (assert) {
       assert.expect(1);
 
-      const currentDeviceService = this.owner.lookup("service:currentDevice");
-      currentDeviceService.serialNumber = "1111-AAAA-BBBB";
+      await authenticateSession({ serialNumber: "1111-AAAA-BBBB" });
       this.server.post(
         `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
         function (schema, request) {
           assert.deepEqual(JSON.parse(request.requestBody), {
-            ssid: "Network_1",
-            password: "Password_1",
+            configuration: {
+              ssid: "Network_1",
+              password: "Password_1",
+            },
           });
         }
       );

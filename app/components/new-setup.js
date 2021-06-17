@@ -13,6 +13,7 @@ const STEPS = {
 
 export default class NewSetupComponent extends Component {
   @service currentDevice;
+  @service session;
   @service intl;
 
   @tracked networkName = "";
@@ -71,12 +72,14 @@ export default class NewSetupComponent extends Component {
   async configureDevice() {
     try {
       const response = await fetch(
-        `${ENV.APP.BASE_API_URL}/api/v1/device/${this.currentDevice.data.serialNumber}/configure`,
+        `${ENV.APP.BASE_API_URL}/api/v1/device/${this.session.data.authenticated.serialNumber}/configure`,
         {
           method: "POST",
           body: JSON.stringify({
-            ssid: this.networkName,
-            password: this.networkPassword,
+            configuration: {
+              ssid: this.networkName,
+              password: this.networkPassword,
+            },
           }),
         }
       );
