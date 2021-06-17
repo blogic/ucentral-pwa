@@ -6,6 +6,7 @@ import {
   authenticateSession,
   invalidateSession,
 } from "ember-simple-auth/test-support";
+import ENV from "ucentral/config/environment";
 
 module("Acceptance | qr-code", function (hooks) {
   setupApplicationTest(hooks);
@@ -25,7 +26,20 @@ module("Acceptance | qr-code", function (hooks) {
 
   module("when the session is authenticated", function (hooks) {
     hooks.beforeEach(async function () {
-      await authenticateSession();
+      await authenticateSession({ serialNumber: "AAAA-CCCC" });
+      this.server.get(
+        `${ENV.APP.BASE_API_URL}/api/v1/device/AAAA-CCCC`,
+        function () {
+          return {
+            configuration: {
+              ssid: "the-ssid",
+              password: "mypass",
+              encryption: "wpa2",
+              hidden: true,
+            },
+          };
+        }
+      );
     });
 
     test("route is accessible", async function (assert) {
@@ -35,21 +49,9 @@ module("Acceptance | qr-code", function (hooks) {
     });
 
     test("the correct network settings are rendered", async function (assert) {
-      this.get("/network-settings", function () {
-        return new Response(
-          400,
-          { "content-type": "application/json" },
-          {
-            ssid: "mynetwork",
-            password: "mypass",
-            encryption: "wpa2",
-            hidden: false,
-          }
-        );
-      });
       await visit("/qr-code");
 
-      assert.dom("[data-test-layout-description]").containsText("mynetwork");
+      assert.dom("[data-test-layout-description]").containsText("the-ssid");
     });
 
     test("the QR code is rendered", async function (assert) {
