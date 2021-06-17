@@ -41,14 +41,14 @@ module("Unit | Authenticator | UcentralRouterAuthenticator", function (hooks) {
   test("#authenticate payload on success is returned", async function (assert) {
     assert.expect(1);
     this.server.post(`${ENV.APP.BASE_API_URL}/api/v1/oauth2`, () => {
-      return new Response(200, {}, { succeeded: true });
+      return new Response(200, {}, { serialNumber: "AAAA-CCCC" });
     });
 
     const data = await this.authenticator.authenticate({
       userId: "192.168.1.1",
       password: "Secret",
     });
-    assert.deepEqual(data, { succeeded: true });
+    assert.deepEqual(data, { serialNumber: "AAAA-CCCC" });
   });
 
   test("#authenticate rejects on bad request", async function (assert) {
@@ -68,9 +68,11 @@ module("Unit | Authenticator | UcentralRouterAuthenticator", function (hooks) {
   test("#restore returns data it received", async function (assert) {
     assert.expect(1);
 
-    const data = await this.authenticator.restore({ succeeded: true });
+    const data = await this.authenticator.restore({
+      serialNumber: "AAAA-CCCC",
+    });
 
-    assert.deepEqual(data, { succeeded: true });
+    assert.deepEqual(data, { serialNumber: "AAAA-CCCC" });
   });
 
   test("#restore throws when it receives empty session object", async function (assert) {

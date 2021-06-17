@@ -32,7 +32,7 @@ export default function () {
       const payload = JSON.parse(request.requestBody);
 
       if (payload.userId === "192.168.1.1" && payload.password === "Secret") {
-        return new Response(200, {}, { succeeded: true });
+        return new Response(200, {}, { serialNumber: "AAAA-CCCC" });
       }
 
       return new Response(400, {}, {});
