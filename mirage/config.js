@@ -59,8 +59,17 @@ export default function () {
 
   this.post(
     `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
-    function () {
-      return new Response(200, {}, {});
+    function (schema, request) {
+      const foundDevice = schema.db.devices.findBy({
+        serialNumber: request.params.serialNumber,
+      });
+
+      const updatedDevice = schema.db.devices.update(
+        foundDevice,
+        JSON.parse(request.requestBody)
+      );
+
+      return new Response(200, {}, updatedDevice);
     }
   );
 
@@ -112,7 +121,6 @@ export default function () {
       );
     }
   );
-
   this.get(
     `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber`,
     function (schema, request) {
