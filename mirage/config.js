@@ -87,7 +87,7 @@ export default function () {
 
   this.get("/network-settings", function () {
     return new Response(
-      400,
+      200,
       { "content-type": "application/json" },
       {
         ssid: "mynetwork",
