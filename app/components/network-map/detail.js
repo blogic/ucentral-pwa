@@ -9,7 +9,7 @@ export default class NetworkMapDetailComponent extends Component {
   *loadHealthChecksTask(serialNumber) {
     try {
       const response = yield this.http.get(
-        `/api/v1/devices/${serialNumber}/healthchecks`
+        `/api/v1/device/${serialNumber}/healthchecks`
       );
 
       if (response.ok) {

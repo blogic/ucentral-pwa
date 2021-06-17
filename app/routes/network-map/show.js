@@ -14,7 +14,7 @@ export default class NetworkMapDetailRoute extends Route {
 
   async loadDevice(serialNumber) {
     try {
-      const response = await this.http.get(`/api/v1/devices/${serialNumber}`);
+      const response = await this.http.get(`/api/v1/device/${serialNumber}`);
 
       if (response.ok) {
         return response.json();
@@ -29,7 +29,7 @@ export default class NetworkMapDetailRoute extends Route {
   async loadConnectedDevices(serialNumber) {
     try {
       const response = await this.http.get(
-        `/api/v1/devices/${serialNumber}/connectedDevices`
+        `/api/v1/device/${serialNumber}/connectedDevices`
       );
 
       if (response.ok) {

@@ -14,7 +14,7 @@ module("Integration | Component | NetworkMap::Detail", function (hooks) {
   module("Access Point", function () {
     test("shows network health text", async function (assert) {
       this.server.get(
-        `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber`,
+        `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber`,
         function () {
           return new Response(400, {}, {});
         }
@@ -28,7 +28,7 @@ module("Integration | Component | NetworkMap::Detail", function (hooks) {
 
     test("shows network health status", async function (assert) {
       this.server.get(
-        `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber/healthchecks`,
+        `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/healthchecks`,
         function () {
           return {
             serialNumber: "TEST-TEST",
