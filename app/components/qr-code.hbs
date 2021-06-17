@@ -1,10 +1,10 @@
 <Uc::Layout>
   <:navigation><Uc::Layout::BackNavigation @route="index" /></:navigation>
   <:title>{{t "qr_code.title"}}</:title>
-  <:description>{{t "qr_code.description" ssid=@ssid}}</:description>
+  <:description>{{t "qr_code.description" ssid=this.currentDevice.data.configuration.ssid}}</:description>
   <:content as |content|>
     <content.Wrapper>
-      <Uc::NetworkQrCode @ssid={{@ssid}} @password={{@password}} @encryption={{@encryption}} @isHidden={{@isHidden}} data-test-qr-code />
+      <Uc::NetworkQrCode @ssid={{this.currentDevice.data.configuration.ssid}} @password={{this.currentDevice.data.configuration.password}} @encryption={{this.currentDevice.data.configuration.encryption}} @isHidden={{this.currentDevice.data.configuration.hidden}} data-test-qr-code />
     </content.Wrapper>
   </:content>
 </Uc::Layout>

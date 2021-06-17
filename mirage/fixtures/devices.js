@@ -34,12 +34,12 @@ export default [
     macAddress: "00:1A:C4",
     location: "Office 2",
     connectedDevicesCount: 0,
-    configuration: JSON.stringify({
+    configuration: {
       ssid: "Some SSID",
       password: "Secret",
       encryption: "wpa2",
       hidden: false,
-    }),
+    },
   },
   {
     UUID: "5-5",
