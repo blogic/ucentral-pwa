@@ -56,7 +56,7 @@ module("Acceptance | network-setup", function (hooks) {
     await fillIn("[data-test-network-name] [data-test-input]", "my-wifi");
     await click("[data-test-confirm-button]");
     await fillIn(
-      "[data-test-network-password] [data-test-input]",
+      "[data-test-network-password] [data-test-password-input]",
       "some password"
     );
     await click("[data-test-confirm-button]");

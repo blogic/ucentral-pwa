@@ -60,11 +60,11 @@
           {{/if}}
 
           {{#if this.isNetworkPasswordStep}}
-            <Uc::Input
-              local-class="input"
+            <Uc::PasswordInput
               @label={{t "network_setup.wifi_password.label"}}
               @value={{this.networkPassword}}
               @onInput={{this.handleNetworkPassword}}
+              local-class="input"
               data-test-network-password
             />
 

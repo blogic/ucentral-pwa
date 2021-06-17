@@ -21,7 +21,7 @@ const goToApplyingSettingsStep = async ({
 } = {}) => {
   await goToPasswordStep(networkName);
   await fillIn(
-    "[data-test-network-password] [data-test-input]",
+    "[data-test-network-password] [data-test-password-input]",
     networkPassword
   );
   return click("[data-test-confirm-button]");
@@ -127,7 +127,7 @@ module("Integration | Component | NewSetup", function (hooks) {
         await goToPasswordStep();
 
         assert
-          .dom("[data-test-network-password] [data-test-input]")
+          .dom("[data-test-network-password] [data-test-password-input]")
           .hasNoValue();
         assert.dom("[data-test-confirm-button]").hasAttribute("disabled");
       });
@@ -295,7 +295,7 @@ module("Integration | Component | NewSetup", function (hooks) {
       await render(hbs`<NewSetup />`);
       await goToPasswordStep();
       await fillIn(
-        "[data-test-network-password] [data-test-input]",
+        "[data-test-network-password] [data-test-password-input]",
         "some password"
       );
 
@@ -331,7 +331,7 @@ module("Integration | Component | NewSetup", function (hooks) {
       await render(hbs`<NewSetup />`);
       await goToPasswordStep();
       await fillIn(
-        "[data-test-network-password] [data-test-input]",
+        "[data-test-network-password] [data-test-password-input]",
         "some password"
       );
       await click("[data-test-confirm-button]");
