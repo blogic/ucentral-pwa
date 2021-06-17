@@ -3,7 +3,6 @@ import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
 import { task } from "ember-concurrency-decorators";
 import { inject as service } from "@ember/service";
-import ENV from "ucentral/config/environment";
 
 const STEPS = {
   NETWORK_NAME: "NETWORK_NAME",
@@ -14,6 +13,7 @@ const STEPS = {
 export default class NewSetupComponent extends Component {
   @service currentDevice;
   @service intl;
+  @service router;
 
   @tracked networkName = "";
   @tracked networkPassword = "";
@@ -63,30 +63,19 @@ export default class NewSetupComponent extends Component {
 
       if (!configureDeviceResponse.ok) {
         this.goToStep(STEPS.NETWORK_NAME);
+        return configureDeviceResponse;
       }
-      return configureDeviceResponse;
+
+      this.router.transitionTo("network-setup.success");
     }
   }
 
   async configureDevice() {
     try {
-      const response = await fetch(
-        `${ENV.APP.BASE_API_URL}/api/v1/device/${this.currentDevice.data.serialNumber}/configure`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            ssid: this.networkName,
-            password: this.networkPassword,
-          }),
-        }
+      const response = await this.currentDevice.configure(
+        this.networkName,
+        this.networkPassword
       );
-
-      if (!response.ok) {
-        return {
-          ok: false,
-          errorMessage: this.intl.t("errors.somethingWentWrong"),
-        };
-      }
 
       return response;
     } catch (error) {

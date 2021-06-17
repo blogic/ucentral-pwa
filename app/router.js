@@ -10,6 +10,7 @@ Router.map(function () {
   this.route("auth");
   this.route("network-setup", function () {
     this.route("new");
+    this.route("success");
   });
   this.route("qr-code");
 

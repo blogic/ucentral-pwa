@@ -64,10 +64,13 @@ export default function () {
         serialNumber: request.params.serialNumber,
       });
 
-      const updatedDevice = schema.db.devices.update(
-        foundDevice,
-        JSON.parse(request.requestBody)
-      );
+      const body = JSON.parse(request.requestBody);
+      const [updatedDevice] = schema.db.devices.update(foundDevice, {
+        configuration: {
+          ...body.configuration,
+          encryption: "wpa2",
+        },
+      });
 
       return new Response(200, {}, updatedDevice);
     }

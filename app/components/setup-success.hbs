@@ -1,0 +1,20 @@
+<Uc::Layout>
+  <:title>
+    {{t "network_setup.success.title"}}
+  </:title>
+
+  <:description>
+    {{t "network_setup.success.description" deviceName=this.currentDevice.data.name htmlSafe=true}}
+  </:description>
+
+  <:content as |content|>
+    <content.Wrapper>
+      <main data-test-setup-success>
+        <Uc::NetworkQrCode @ssid={{this.currentDevice.data.configuration.ssid}} @password={{this.currentDevice.data.configuration.password}} @encryption={{this.currentDevice.data.configuration.encryption}} @isHidden={{this.currentDevice.configuration.data.hidden}} data-test-qr-code />
+        <LinkTo @route="index" local-class="dashboard-link" data-test-dashboard-link>
+          {{t "network_setup.success.go_to_dashboard"}}
+        </LinkTo>
+      </main>
+    </content.Wrapper>
+  </:content>
+</Uc::Layout>

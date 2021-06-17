@@ -60,6 +60,11 @@
     "applying_settings": {
       "title": "Just a moment, we're applying your settings",
       "description": "Your <b>{deviceName}</b> mesh network is getting started..."
+    },
+    "success": {
+      "title": "Success!",
+      "description": "Your <b>{deviceName}</b> mesh network is set up. You can connect via your device’s settings.<br/><br/>Use this QR code to connect other devices.",
+      "go_to_dashboard": "View network dashboard"
     }
   },
   "network_settings": {
