@@ -2,6 +2,7 @@ export default [
   {
     UUID: "1-1",
     serialNumber: "A-A",
+    name: "Aritz",
     deviceType: "AP",
     macAddress: "00:1A:C1",
     location: "entrance",
@@ -10,6 +11,7 @@ export default [
   {
     UUID: "2-2",
     serialNumber: "B-B",
+    name: "Britz",
     deviceType: "AP",
     macAddress: "00:1A:C2",
     location: "meeting",
@@ -18,6 +20,7 @@ export default [
   {
     UUID: "3-3",
     serialNumber: "C-C",
+    name: "Critz",
     deviceType: "SWITCH",
     macAddress: "00:1A:C3",
     location: "Office 1",
@@ -26,6 +29,7 @@ export default [
   {
     UUID: "4-4",
     serialNumber: "configured-serial",
+    name: "Dritz",
     deviceType: "AP",
     macAddress: "00:1A:C4",
     location: "Office 2",
@@ -40,6 +44,7 @@ export default [
   {
     UUID: "5-5",
     serialNumber: "unconfigured-serial",
+    name: "Eritz",
     deviceType: "AP",
     macAddress: "00:1A:C5",
     location: "Office 3",
