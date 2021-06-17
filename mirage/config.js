@@ -85,19 +85,6 @@ export default function () {
     }
   );
 
-  this.get("/network-settings", function () {
-    return new Response(
-      200,
-      { "content-type": "application/json" },
-      {
-        ssid: "mynetwork",
-        password: "mypass",
-        encryption: "wpa2",
-        hidden: false,
-      }
-    );
-  });
-
   this.get(
     `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/healthchecks`,
     function (schema, request) {
