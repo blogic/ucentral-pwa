@@ -1,0 +1,3 @@
+.dashboard-link {
+  @apply mt-6 text-blue-600 block text-center uppercase p-3;
+}
