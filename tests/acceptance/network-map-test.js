@@ -197,7 +197,7 @@ module("Acceptance | network-map", function (hooks) {
   module("/Show", function () {
     test("shows connected devices list", async function (assert) {
       this.server.get(
-        `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber/connectedDevices`,
+        `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/connectedDevices`,
         function () {
           return [{ serialNumber: "1" }, { serialNumber: "2" }];
         }
@@ -211,7 +211,7 @@ module("Acceptance | network-map", function (hooks) {
 
     test("shows connected devices sumnmary", async function (assert) {
       this.server.get(
-        `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber`,
+        `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber`,
         function () {
           return new Response(200, {}, [
             {
@@ -222,7 +222,7 @@ module("Acceptance | network-map", function (hooks) {
         }
       );
       this.server.get(
-        `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber/connectedDevices`,
+        `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/connectedDevices`,
         function () {
           return [
             {

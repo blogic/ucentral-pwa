@@ -87,7 +87,7 @@ export default function () {
   });
 
   this.get(
-    `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber/healthchecks`,
+    `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/healthchecks`,
     function (schema, request) {
       return new Response(
         200,
@@ -98,19 +98,9 @@ export default function () {
       );
     }
   );
-  this.get(
-    `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber`,
-    function (schema, request) {
-      const device = schema.db.devices.findBy({
-        serialNumber: request.params.serialNumber,
-      });
-
-      return new Response(200, {}, device);
-    }
-  );
 
   this.get(
-    `${ENV.APP.BASE_API_URL}/api/v1/devices/:serialNumber/connectedDevices`,
+    `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/connectedDevices`,
     function (schema) {
       return new Response(200, {}, schema.db.devices.toArray());
     }
