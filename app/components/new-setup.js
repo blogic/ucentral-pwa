@@ -3,7 +3,6 @@ import { action } from "@ember/object";
 import { tracked } from "@glimmer/tracking";
 import { task } from "ember-concurrency-decorators";
 import { inject as service } from "@ember/service";
-import ENV from "ucentral/config/environment";
 
 const STEPS = {
   NETWORK_NAME: "NETWORK_NAME",
@@ -70,23 +69,10 @@ export default class NewSetupComponent extends Component {
 
   async configureDevice() {
     try {
-      const response = await fetch(
-        `${ENV.APP.BASE_API_URL}/api/v1/device/${this.currentDevice.data.serialNumber}/configure`,
-        {
-          method: "POST",
-          body: JSON.stringify({
-            ssid: this.networkName,
-            password: this.networkPassword,
-          }),
-        }
+      const response = await this.currentDevice.configure(
+        this.networkName,
+        this.networkPassword
       );
-
-      if (!response.ok) {
-        return {
-          ok: false,
-          errorMessage: this.intl.t("errors.somethingWentWrong"),
-        };
-      }
 
       return response;
     } catch (error) {

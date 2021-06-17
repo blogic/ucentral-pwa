@@ -147,7 +147,14 @@ module("Integration | Component | NewSetup", function (hooks) {
         this.server.post(
           `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
           function () {
-            return new Response(200, {}, {});
+            return {
+              configuration: {
+                ssid: "the-ssid",
+                password: "mypass",
+                encryption: "wpa2",
+                hidden: true,
+              },
+            };
           }
         );
       });
@@ -249,8 +256,10 @@ module("Integration | Component | NewSetup", function (hooks) {
         `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/configure`,
         function (schema, request) {
           assert.deepEqual(JSON.parse(request.requestBody), {
-            ssid: "Network_1",
-            password: "Password_1",
+            configuration: {
+              ssid: "Network_1",
+              password: "Password_1",
+            },
           });
         }
       );

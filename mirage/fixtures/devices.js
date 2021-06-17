@@ -34,6 +34,7 @@ export default [
       ssid: "Some SSID",
       password: "Secret",
       encryption: "wpa2",
+      hidden: false,
     }),
   },
   {
