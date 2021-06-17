@@ -21,5 +21,6 @@ Router.map(function () {
   this.route("network-settings", function () {
     this.route("network-password");
     this.route("network-name");
+    this.route("success");
   });
 });

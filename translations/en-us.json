@@ -65,7 +65,10 @@
   "network_settings": {
     "title": "Edit settings",
     "description": "Edit your <b>{deviceName}</b> mesh network settings",
-    "change_network_name": "Change network name",
-    "change_network_password": "Change network password"
+    "success": {
+      "title": "Success!",
+      "description": "Your <b>{deviceName}</b> mesh network has been updated. Connect via your device's settings.",
+      "view_dashboard": "View network dashboard"
+    }
   }
 }
