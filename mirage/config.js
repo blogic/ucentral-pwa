@@ -100,8 +100,14 @@ export default function () {
 
   this.get(
     `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/connectedDevices`,
-    function (schema) {
-      return new Response(200, {}, schema.db.devices.toArray());
+    function (schema, request) {
+      return new Response(
+        200, 
+        {}, 
+        schema.db.connecteddevices.findBy({
+          serialNumber: request.params.serialNumber,
+        }).connectedDevices
+      );
     }
   );
 

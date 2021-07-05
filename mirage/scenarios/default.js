@@ -1,5 +1,6 @@
 export default function (server) {
   server.loadFixtures("devices");
+  server.loadFixtures("connecteddevices");
   server.loadFixtures("healthchecks");
   /*
     Seed your development database using your factories.
