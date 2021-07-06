@@ -102,8 +102,8 @@ export default function () {
     `${ENV.APP.BASE_API_URL}/api/v1/device/:serialNumber/connectedDevices`,
     function (schema, request) {
       return new Response(
-        200, 
-        {}, 
+        200,
+        {},
         schema.db.connecteddevices.findBy({
           serialNumber: request.params.serialNumber,
         }).connectedDevices
