@@ -6,7 +6,7 @@ export default [
     deviceType: "AP",
     macAddress: "00:1A:C1",
     location: "entrance",
-    connectedDevicesCount: 13,
+    connectedDevicesCount: 5,
   },
   {
     UUID: "2-2",
